@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Story | Michael's Pub & Patio</title>
+    <link rel="preconnect" href="https://cdn.prod.website-files.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barrio&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      href="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/64e7923d2a7d9a036e0733e0_favicon-burgersite.png"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ink: "#181818",
+              cream: "#FFF9F0",
+              sauce: "#E31524",
+              bun: "#E39E43",
+              pickle: "#05C167",
+            },
+            fontFamily: {
+              display: ["Barrio", "Georgia", "sans-serif"],
+              sans: ["Work Sans", "sans-serif"],
+            },
+            maxWidth: { site: "72rem" },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="css/main.css?v=12" />
+  </head>
+  <body class="bg-ink text-cream font-sans">
+    <div class="order-modal" data-order-modal>
+      <div class="order-modal__backdrop" data-close-order></div>
+      <div class="order-modal__panel">
+        <button class="absolute top-6 right-6 text-cream/80" type="button" aria-label="Close" data-close-order>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M24.056 23.5004L23.5004 24.056C23.1935 24.3628 22.696 24.3628 22.3892 24.056L16 17.6668L9.61078 24.056C9.30394 24.3628 8.80645 24.3628 8.49961 24.056L7.94403 23.5004C7.63719 23.1936 7.63719 22.6961 7.94403 22.3892L14.3332 16L7.94403 9.61081C7.63719 9.30397 7.63719 8.80648 7.94403 8.49964L8.49961 7.94406C8.80645 7.63721 9.30394 7.63721 9.61078 7.94406L16 14.3333L22.3892 7.94404C22.6961 7.6372 23.1935 7.6372 23.5004 7.94404L24.056 8.49963C24.3628 8.80647 24.3628 9.30395 24.056 9.61079L17.6667 16L24.056 22.3892C24.3628 22.6961 24.3628 23.1936 24.056 23.5004Z" fill="currentColor"/></svg>
+        </button>
+        <div class="mx-auto max-w-xl text-center">
+          <h2 class="mb-3">Call to order</h2>
+          <p class="text-medium">Dine-in, takeout &amp; delivery from 208 Pollock St.</p>
+          <a class="btn-doodle is-cream mt-8" href="tel:+12526311209"><span class="btn-label">(252) 631-1209</span></a>
+          <div class="home-photos is-modal">
+            <img class="home-photo is-1" src="images/yuengling.jpg" alt="Yuengling" />
+            <img class="home-photo is-2" src="images/georgia_peach.jpg" alt="Georgia peach" />
+            <img class="home-photo is-3" src="images/all_american_lemonade.jpg" alt="All American lemonade" />
+            <img class="home-photo is-4" src="images/5draftday.jpg" alt="Draft day" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="mx-auto flex max-w-site items-center justify-between px-6 py-4 md:px-10">
+        <a href="index.html" class="brand-mark" aria-label="home">Michael's<small>Pub &amp; Patio</small></a>
+        <nav class="hidden items-center gap-8 lg:flex">
+          <a class="navbar_link" href="about.html"><span class="navbar-link_label">Our Story</span></a>
+          <a class="navbar_link" href="index.html#menu"><span class="navbar-link_label">Menu</span></a>
+          <a class="navbar_link" href="index.html#guests"><span class="navbar-link_label">Guests</span></a>
+          <a class="navbar_link" href="contact.html"><span class="navbar-link_label">Visit</span></a>
+          <a class="btn-doodle is-cream" href="#" data-open-order><span class="btn-label">call to order</span></a>
+        </nav>
+        <button class="relative z-50 p-2 lg:hidden" type="button" aria-label="menu" aria-expanded="false" data-nav-toggle>
+          <div class="menu-icon"><span></span><span></span><span></span></div>
+        </button>
+      </div>
+    </header>
+
+    <div class="nav-overlay lg:hidden" data-nav-overlay>
+      <a href="about.html">Our Story</a>
+      <a href="index.html#menu">Menu</a>
+      <a href="index.html#guests">Guests</a>
+      <a href="contact.html">Visit</a>
+      <a class="btn-doodle is-cream mt-4" href="#" data-open-order><span class="btn-label">call to order</span></a>
+    </div>
+
+    <main>
+      <section class="about-hero mx-auto max-w-site px-6 py-16 md:px-10 md:py-24">
+        <div class="about-hero__inner">
+          <h1 class="font-display max-w-3xl text-4xl leading-tight md:text-6xl reveal is-in">
+            A historic Pollock Street house, turned into the neighborhood's living room.
+          </h1>
+          <p class="mt-8 max-w-2xl text-base leading-7 text-cream/80 md:text-lg">
+            Michael's opened in the heart of downtown New Bern in a converted early-1900s home, tucked between the municipal buildings and the boat docks. We kept the bones of the house — the porches, the courtyard, the creaky charm — and filled it with a full bar, an upstairs dining room, and two outdoor patios.
+          </p>
+          <img class="about-hero__photo" src="images/building.jpg" alt="The historic house on Pollock Street" />
+        </div>
+      </section>
+
+      <section class="mx-auto max-w-site px-6 pb-16 md:px-10 md:pb-24">
+        <div class="about-box reveal">
+          <h2 class="font-display text-3xl md:text-5xl">Good ol' southern hospitality</h2>
+          <p class="mt-6 max-w-2xl leading-7 text-cream/80">
+            Everything we serve is built on the same idea: a menu that isn't afraid of a little jerk-spiced heat, jumbo wings, and prices that keep locals coming back every week.
+          </p>
+        </div>
+        <div class="mt-10 grid grid-cols-2 gap-8 md:grid-cols-4 reveal">
+          <div><div class="font-display text-4xl">2020</div><p class="mt-2 text-sm text-cream/70">Established downtown</p></div>
+          <div><div class="font-display text-4xl">2</div><p class="mt-2 text-sm text-cream/70">Dog-friendly patios</p></div>
+          <div><div class="font-display text-4xl">$1</div><p class="mt-2 text-sm text-cream/70">Wing Sunday</p></div>
+          <div><div class="font-display text-4xl">0</div><p class="mt-2 text-sm text-cream/70">Leash required? Never for the welcome</p></div>
+        </div>
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+          <img class="h-52 w-full object-cover" src="images/patio_ad.jpg" alt="Patio" />
+          <img class="h-52 w-full object-cover" src="images/couple_dog.jpg" alt="Guests with a dog" />
+          <img class="h-52 w-full object-cover" src="images/roast_beef_gravy.jpg" alt="Roast beef and gravy" />
+        </div>
+      </section>
+
+      <section class="mx-auto max-w-site px-6 pb-24 md:px-10">
+        <h2 class="font-display text-4xl md:text-5xl reveal">Word travels fast on Pollock Street</h2>
+        <p class="mt-4 text-cream/70 reveal">What locals say about the patio, the wings, and bringing the dog.</p>
+        <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <blockquote class="about-box reveal">
+            <p>Regulars describe Michael's as their standing go-to, praising the patio seating, the food, and a staff that always makes them feel welcome.</p>
+            <footer class="mt-6 font-semibold">Verified guest · New Bern, NC</footer>
+          </blockquote>
+          <blockquote class="about-box reveal">
+            <p>Guests consistently point to the fried seafood and jumbo wings as standouts, calling the Sunday wing special some of the best in town.</p>
+            <footer class="mt-6 font-semibold">Verified guest · New Bern, NC</footer>
+          </blockquote>
+          <blockquote class="about-box reveal">
+            <p>Diners with dogs often mention the fresh water bowls and dedicated dog menu, calling it a favorite downtown stop for people and pets alike.</p>
+            <footer class="mt-6 font-semibold">Verified guest · New Bern, NC</footer>
+          </blockquote>
+        </div>
+      </section>
+    </main>
+
+    <footer class="px-6 pb-10 pt-10 md:px-10">
+      <div class="mx-auto max-w-site border-t border-cream/15 pt-8 flex flex-wrap items-center justify-between gap-4">
+        <a href="index.html" class="brand-mark">Michael's<small>Pub &amp; Patio</small></a>
+        <p class="text-sm">© 2026 Michael's Pub &amp; Patio. All rights reserved.</p>
+      </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <script src="js/main.js?v=9"></script>
+  </body>
+</html>

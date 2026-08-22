@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Michael's Pub & Patio | Dog-Friendly Pub in Downtown New Bern, NC</title>
+    <meta
+      name="description"
+      content="Michael's Pub & Patio is a dog-friendly restaurant and bar in a historic converted home at 208 Pollock St, downtown New Bern, NC. Jerk-spiced pub fare, jumbo wings, burgers, and two outdoor patios."
+    />
+    <link rel="preconnect" href="https://cdn.prod.website-files.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barrio&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23181818'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%23E39E43' font-family='Georgia,serif'%3EM%3C/text%3E%3C/svg%3E"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ink: "#181818",
+              cream: "#FFF9F0",
+              sauce: "#E31524",
+              bun: "#E39E43",
+              pickle: "#05C167",
+            },
+            fontFamily: {
+              display: ["Barrio", "Georgia", "sans-serif"],
+              sans: ["Work Sans", "sans-serif"],
+            },
+            maxWidth: { site: "72rem" },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="css/main.css?v=16" />
+  </head>
+  <body class="bg-ink text-cream font-sans">
+    <div class="order-modal" data-order-modal>
+      <div class="order-modal__backdrop" data-close-order></div>
+      <div class="order-modal__panel">
+        <button class="absolute top-6 right-6 text-cream/80 hover:text-cream" type="button" aria-label="Close" data-close-order>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path d="M24.056 23.5004L23.5004 24.056C23.1935 24.3628 22.696 24.3628 22.3892 24.056L16 17.6668L9.61078 24.056C9.30394 24.3628 8.80645 24.3628 8.49961 24.056L7.94403 23.5004C7.63719 23.1936 7.63719 22.6961 7.94403 22.3892L14.3332 16L7.94403 9.61081C7.63719 9.30397 7.63719 8.80648 7.94403 8.49964L8.49961 7.94406C8.80645 7.63721 9.30394 7.63721 9.61078 7.94406L16 14.3333L22.3892 7.94404C22.6961 7.6372 23.1935 7.6372 23.5004 7.94404L24.056 8.49963C24.3628 8.80647 24.3628 9.30395 24.056 9.61079L17.6667 16L24.056 22.3892C24.3628 22.6961 24.3628 23.1936 24.056 23.5004Z" fill="currentColor"/>
+          </svg>
+        </button>
+        <div class="mx-auto max-w-xl text-center">
+          <h2 class="mb-3">Call to order</h2>
+          <p class="text-medium">Dine-in, takeout &amp; delivery from 208 Pollock St.</p>
+          <a class="btn-doodle is-cream mt-8" href="tel:+12526311209"><span class="btn-label">(252) 631-1209</span></a>
+          <div class="home-photos is-modal">
+            <img class="home-photo is-1" src="images/yuengling.jpg" alt="Yuengling" />
+            <img class="home-photo is-2" src="images/georgia_peach.jpg" alt="Georgia peach" />
+            <img class="home-photo is-3" src="images/all_american_lemonade.jpg" alt="All American lemonade" />
+            <img class="home-photo is-4" src="images/5draftday.jpg" alt="Draft day" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="mx-auto flex max-w-site items-center justify-between px-6 py-4 md:px-10">
+        <a href="index.html" class="brand-mark" aria-label="home">
+          Michael's
+          <small>Pub &amp; Patio</small>
+        </a>
+        <nav class="hidden items-center gap-8 lg:flex">
+          <a class="navbar_link" href="about.html"><span class="navbar-link_label">Our Story</span></a>
+          <a class="navbar_link" href="#menu" data-scroll><span class="navbar-link_label">Menu</span></a>
+          <a class="navbar_link" href="#guests" data-scroll><span class="navbar-link_label">Guests</span></a>
+          <a class="navbar_link" href="contact.html"><span class="navbar-link_label">Visit</span></a>
+          <a class="btn-doodle is-cream" href="#" data-open-order><span class="btn-label">call to order</span></a>
+        </nav>
+        <button class="relative z-50 p-2 lg:hidden" type="button" aria-label="menu" aria-expanded="false" data-nav-toggle>
+          <div class="menu-icon"><span></span><span></span><span></span></div>
+        </button>
+      </div>
+    </header>
+
+    <div class="nav-overlay lg:hidden" data-nav-overlay>
+      <a href="about.html">Our Story</a>
+      <a href="#menu" data-scroll>Menu</a>
+      <a href="#guests" data-scroll>Guests</a>
+      <a href="contact.html">Visit</a>
+      <a class="btn-doodle is-cream mt-4" href="#" data-open-order><span class="btn-label">call to order</span></a>
+    </div>
+
+    <main>
+      <section class="section_hero relative overflow-hidden">
+        <div class="mx-auto max-w-site px-6 pb-6 pt-8 md:px-10 md:pt-14">
+          <div class="hero_banner-wrapper text-center">
+            <h1 class="heading-hero reveal">
+              Good food, good people,<br />
+              <span class="hero-underline is-red">good ol'</span>
+              southern
+              <span class="hero-underline is-yellow">hospitality.</span>
+            </h1>
+            <img class="hero-image" data-hero-image src="images/table_spread.jpg" alt="A table spread at Michael's Pub & Patio" />
+          </div>
+        </div>
+        <div class="hero-fade"></div>
+      </section>
+
+      <section class="section_logo">
+        <div class="mx-auto max-w-site px-6 py-16 md:px-10 md:py-20">
+          <div class="logo_component reveal-fade grid items-center gap-10 md:grid-cols-2">
+            <h2 class="heading-h4">
+              Feeling lazy?<br />Call, takeout, or pull up a patio chair.
+            </h2>
+            <div class="home-photos">
+              <img class="home-photo is-1" src="images/yuengling.jpg" alt="Cold Yuengling" />
+              <img class="home-photo is-2" src="images/georgia_peach.jpg" alt="Georgia peach drink" />
+              <img class="home-photo is-3" src="images/all_american_lemonade.jpg" alt="All American lemonade" />
+              <img class="home-photo is-4" src="images/patio_day.jpg" alt="Patio in daylight" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section_about relative overflow-hidden" id="about">
+        <img class="about-doodle doodle-in left-6 top-10 w-16 md:w-24" src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/643ec8abce0c2b8e0554532e_doodle-huricane.svg" alt="" />
+        <img class="about-doodle doodle-in right-8 top-24 w-16 md:w-20" src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/643ec913cf86b12a4545dbea_stars.svg" alt="" />
+        <div class="mx-auto max-w-site px-6 py-16 md:px-10 md:py-24">
+          <div class="about_wrapper relative reveal flex flex-col gap-3">
+            <img class="about-doodle -left-2 -top-6 w-24 md:w-36" src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/643ec799dc766d5c5b55847c_Highlight%2016.svg" alt="" />
+            <div class="about-box relative">
+              <div class="flex flex-wrap items-end gap-4">
+                <h2>Our story</h2>
+                <img class="mb-1 w-36 md:w-44" src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/643ec6b00c952b6d2b0e745f_Arrow3.svg" alt="" />
+              </div>
+            </div>
+            <div class="about-box grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+              <p class="text-medium max-w-3xl">
+                Michael's opened in a converted early-1900s home at 208 Pollock St, downtown New Bern — tucked between the municipal buildings and the boat docks. We kept the porches, the courtyard, and the creaky charm, then filled it with a full bar, an upstairs dining room, and two dog-friendly patios. Jerk-spiced pub fare, jumbo wings, and prices that keep locals coming back.
+              </p>
+              <img class="w-full max-h-64 object-cover" src="images/building.jpg" alt="Michael's Pub & Patio on Pollock Street" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section_menu" id="menu">
+        <div class="mx-auto max-w-site px-6 py-16 md:px-10 md:py-24">
+          <div class="heading-menu_wrapper mx-auto mb-12 max-w-2xl text-center reveal">
+            <h2 class="mb-5">Menu</h2>
+            <p class="text-medium text-cream/80">
+              Pub classics with a jerk-spiced signature — hand-pattied burgers, jumbo wings, and a house jerk sauce that shows up where you least expect it.
+            </p>
+          </div>
+
+          <div class="menu-stack">
+            <article class="menu-card is-red">
+              <div class="menu-card-body grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
+                <div class="pb-2">
+                  <h3>Jumbo fire-roasted wings</h3>
+                  <div class="text-large mt-2">$17.49</div>
+                  <p class="text-medium mt-4 max-w-md">
+                    12 fire-roasted wings tossed in Mild Buffalo, Homemade Jerk, Garlic Parmesan, Honey Mustard, or Plain. Sundays they're a dollar a wing.
+                  </p>
+                  <div class="mt-6"><a class="btn-doodle is-white" href="#" data-open-order><span class="btn-label">call to order</span></a></div>
+                </div>
+                <div class="relative">
+                  <img class="menu-scribble" src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/643f14976e150711fea5fe15_Scribble5.svg" alt="" />
+                  <img class="menu-photo" src="images/chx_wings.jpg" alt="Chicken wings" />
+                </div>
+              </div>
+              <div class="menu-kicker">01 — Local favorite</div>
+            </article>
+
+            <article class="menu-card is-yellow">
+              <div class="menu-card-body grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
+                <div class="pb-2">
+                  <h3 class="text-ink">The Pub Burger</h3>
+                  <p class="text-medium mt-4 max-w-md text-ink">
+                    A hand-selected 6oz beef patty on brioche with lettuce, tomato, onion, and pickle. American, Swiss, or provolone.
+                  </p>
+                  <div class="mt-6"><a class="btn-doodle is-black" href="#" data-open-order><span class="btn-label">call to order</span></a></div>
+                </div>
+                <div class="relative">
+                  <img class="menu-scribble" src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/643f14976e150711fea5fe15_Scribble5.svg" alt="" />
+                  <img class="menu-photo" src="images/burger.jpg" alt="The Pub Burger" />
+                </div>
+              </div>
+              <div class="menu-kicker text-ink">02 — Hand-pattied</div>
+            </article>
+
+            <article class="menu-card is-green">
+              <div class="menu-card-body grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
+                <div class="pb-2">
+                  <h3 class="text-ink">The Jerk Burger</h3>
+                  <p class="text-medium mt-4 max-w-md text-ink">
+                    Our classic burger stacked high and finished with mango salsa and house-made jerk sauce.
+                  </p>
+                  <div class="mt-6"><a class="btn-doodle is-black" href="#" data-open-order><span class="btn-label">call to order</span></a></div>
+                </div>
+                <div class="relative">
+                  <img class="menu-scribble" src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/644012adce07f78274a1af14_doodle-green.svg" alt="" />
+                  <img class="menu-photo" src="images/burger3.jpg" alt="The Jerk Burger" />
+                </div>
+              </div>
+              <div class="menu-kicker text-ink">03 — Spicy</div>
+            </article>
+
+            <article class="menu-card is-red">
+              <div class="menu-card-body grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
+                <div class="pb-2">
+                  <h3>Mahi tacos</h3>
+                  <p class="text-medium mt-4 max-w-md">
+                    Grilled mahi on warm tortillas with house coleslaw, mango salsa, avocado, and a jerk drizzle. Shrimp tacos too.
+                  </p>
+                  <div class="mt-6"><a class="btn-doodle is-white" href="#" data-open-order><span class="btn-label">call to order</span></a></div>
+                </div>
+                <div class="relative">
+                  <img class="menu-scribble" src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/643f14976e150711fea5fe15_Scribble5.svg" alt="" />
+                  <img class="menu-photo" src="images/mahi_tacos.jpg" alt="Mahi tacos" />
+                </div>
+              </div>
+              <div class="menu-kicker">04 — From the sea</div>
+            </article>
+
+            <article class="menu-card is-yellow">
+              <div class="menu-card-body grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
+                <div class="pb-2">
+                  <h3 class="text-ink">New York Reuben</h3>
+                  <p class="text-medium mt-4 max-w-md text-ink">
+                    Pastrami, sauerkraut, Swiss, and house sauce on marbled rye. Or go Philly cheesesteak — chopped sirloin, peppers, onions, provolone.
+                  </p>
+                  <div class="mt-6"><a class="btn-doodle is-black" href="#" data-open-order><span class="btn-label">call to order</span></a></div>
+                </div>
+                <div class="relative">
+                  <img class="menu-scribble" src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/643f14976e150711fea5fe15_Scribble5.svg" alt="" />
+                  <img class="menu-photo" src="images/ny_rueben.jpg" alt="New York Reuben" />
+                </div>
+              </div>
+              <div class="menu-kicker text-ink">05 — Guest favorite</div>
+            </article>
+
+            <article class="menu-card is-cream">
+              <div class="menu-card-body grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
+                <div class="pb-2">
+                  <h3>Fried chicken sandwich</h3>
+                  <p class="text-medium mt-4 max-w-md">
+                    Hand-battered crispy chicken on brioche with lettuce, tomato, pickle, and mayo. Pub club and shrimp burgers on the board too.
+                  </p>
+                  <div class="mt-6"><a class="btn-doodle is-black" href="#" data-open-order><span class="btn-label">call to order</span></a></div>
+                </div>
+                <div class="relative">
+                  <img class="menu-scribble" src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/644012adce07f78274a1af14_doodle-green.svg" alt="" />
+                  <img class="menu-photo" src="images/fried_chicken_sandwich.jpg" alt="Fried chicken sandwich" />
+                </div>
+              </div>
+              <div class="menu-kicker">06 — Extra slides</div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section_gallery">
+        <div class="gallery_container">
+          <img class="doodle-yellow_gallery" src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/6440187a2c1fcb26f546ba8c_doodle-yellow-bun.svg" alt="" />
+          <img class="doodle-arrow_gallery" src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/6440187a4546c5daf3d87353_doodle-arrow-red.svg" alt="" />
+          <div class="images-gallery_wrapper" data-gallery-track>
+            <img class="image_gallery" width="375" src="images/chx_wings2.jpg" alt="Wings" />
+            <img class="image_gallery" width="375" src="images/pubnachos.jpg" alt="Pub nachos" />
+            <img class="image_gallery" width="375" src="images/motzerella_sticks.jpg" alt="Mozzarella sticks" />
+            <img class="image_gallery" width="375" src="images/fried_calamari.jpg" alt="Fried calamari" />
+            <img class="image_gallery" width="375" src="images/bang_bang_shrimp.jpg" alt="Bang bang shrimp" />
+            <img class="image_gallery" width="375" src="images/fried_flounder.jpg" alt="Fried flounder" />
+            <img class="image_gallery" width="375" src="images/grilled_mahi.jpg" alt="Grilled mahi" />
+            <img class="image_gallery" width="375" src="images/philly_cheesesteak.jpg" alt="Philly cheesesteak" />
+            <img class="image_gallery" width="375" src="images/shrimp_burgers.jpg" alt="Shrimp burgers" />
+            <img class="image_gallery" width="375" src="images/pub_club_sandwich.jpg" alt="Pub club sandwich" />
+            <img class="image_gallery" width="375" src="images/burger4.jpg" alt="Burger" />
+            <img class="image_gallery" width="375" src="images/fried_mushrooms.jpg" alt="Fried mushrooms" />
+            <img class="image_gallery" width="375" src="images/blackened_tuna_sandwich.jpg" alt="Blackened tuna sandwich" />
+            <img class="image_gallery" width="375" src="images/fried_flounder_sandwich.jpg" alt="Fried flounder sandwich" />
+            <img class="image_gallery" width="375" src="images/allyoucaneatshrimp.jpg" alt="All you can eat shrimp" />
+            <img class="image_gallery" width="375" src="images/baked_chicken.jpg" alt="Baked chicken" />
+            <img class="image_gallery" width="375" src="images/chef_salad.jpg" alt="Chef salad" />
+            <img class="image_gallery" width="375" src="images/grilled_chx_pasta.jpg" alt="Grilled chicken pasta" />
+            <img class="image_gallery" width="375" src="images/pub_club2.jpg" alt="Pub club" />
+            <img class="image_gallery" width="375" src="images/fried_flounder2.jpg" alt="Fried flounder plate" />
+          </div>
+        </div>
+      </section>
+
+      <section class="section_special-offer" id="specials">
+        <div class="special-offer_container reveal">
+          <div class="special-offer-header_wrapper">
+            <h2>Weekly</h2>
+            <div class="special-offer_span">
+              <h2>specials</h2>
+              <img class="doodle_special-offer" width="200" src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/64401cddc4df8d03bf89a8b1_special-offer-circle.svg" alt="" />
+            </div>
+          </div>
+          <p class="text-medium">
+            Sundays: $1 jumbo fire-roasted wings, all day, 12–8:30pm. Thursdays 11am–3pm: Burger Buddy Lunch — two cheeseburgers and two fries for $16. No coupon required.
+          </p>
+          <img class="doodle-spiral-special_offer" src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/64401e534546c52db3d8d731_doodle-spiral-special_offer.svg" alt="" />
+        </div>
+      </section>
+
+      <section class="section_guests" id="guests">
+        <div class="mx-auto max-w-site px-6 text-center">
+          <h2 class="reveal">Guests &amp; the patio</h2>
+          <p class="text-medium mx-auto mt-4 max-w-xl text-cream/80 reveal">
+            Word travels fast on Pollock Street. Dogs on the patio, live music, trivia, and a courtyard that feels like the neighborhood living room.
+          </p>
+        </div>
+        <div class="guests-carpet">
+          <figure class="guest-polaroid is-a doodle-in">
+            <img src="images/guests.jpg" alt="Guests at Michael's" />
+            <figcaption>Regulars</figcaption>
+          </figure>
+          <figure class="guest-polaroid is-b doodle-in">
+            <img src="images/couple_dog.jpg" alt="Couple with their dog on the patio" />
+            <figcaption>Dog-friendly</figcaption>
+          </figure>
+          <figure class="guest-polaroid is-c doodle-in">
+            <img src="images/live_musician.jpg" alt="Live musician" />
+            <figcaption>Live music</figcaption>
+          </figure>
+          <figure class="guest-polaroid is-d doodle-in">
+            <img src="images/music_duo_live.jpg" alt="Music duo live" />
+            <figcaption>On the mic</figcaption>
+          </figure>
+          <figure class="guest-polaroid is-e doodle-in">
+            <img src="images/patio_day.jpg" alt="Patio in the daytime" />
+            <figcaption>The patio</figcaption>
+          </figure>
+          <figure class="guest-polaroid is-f doodle-in">
+            <img src="images/5draftday.jpg" alt="Draft day crowd" />
+            <figcaption>Draft day</figcaption>
+          </figure>
+          <figure class="guest-polaroid is-g doodle-in">
+            <img src="images/trivia_ad.jpg" alt="Trivia night" />
+            <figcaption>Trivia night</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section_faq relative">
+        <div class="mx-auto max-w-site px-6 py-16 md:px-10 md:py-24">
+          <h2 class="mb-12 text-center reveal">FAQs</h2>
+          <div class="faq_component">
+            <div class="faq-row reveal">
+              <div class="text-medium font-bold">Can I bring my dog?</div>
+              <p class="text-medium text-cream/80">Yes. Both patios and the courtyard welcome dogs, with water bowls and a dog menu on request.</p>
+            </div>
+            <div class="faq-row reveal">
+              <div class="text-medium font-bold">Do you take reservations or big groups?</div>
+              <p class="text-medium text-cream/80">Yes — the upstairs dining room seats large parties. Call (252) 631-1209 about hosting a celebration.</p>
+            </div>
+            <div class="faq-row reveal">
+              <div class="text-medium font-bold">Is there takeout and delivery?</div>
+              <p class="text-medium text-cream/80">Dine-in, takeout, and delivery. Call the pub or ask your server about the current draft list and daily catch.</p>
+            </div>
+            <div class="faq-row reveal">
+              <div class="text-medium font-bold">Where do I park?</div>
+              <p class="text-medium text-cream/80">Street parking and a nearby public lot. We're at 208 Pollock St, a short walk from Union Point and the waterfront.</p>
+            </div>
+            <div class="faq-row reveal">
+              <div class="text-medium font-bold">What are your hours?</div>
+              <p class="text-medium text-cream/80">Mon–Tue 11–9, Wed–Thu 11–10, Fri–Sat 11–11, Sunday 12–8:30.</p>
+            </div>
+          </div>
+          <div class="mt-20 text-center reveal">
+            <h3 class="heading-h4 mb-6">Still have questions?</h3>
+            <a class="btn-doodle is-cream" href="contact.html"><span class="btn-label">Contact us</span></a>
+          </div>
+        </div>
+        <img class="pointer-events-none absolute -bottom-8 right-0 w-40 md:w-64" src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/64402cddceed73989f521a28_doodle-blue_footer.svg" alt="" />
+      </section>
+    </main>
+
+    <footer class="footer_component relative px-6 pb-10 pt-16 md:px-10 md:pt-24">
+      <div class="mx-auto max-w-site reveal-fade">
+        <div class="grid gap-12 md:grid-cols-[1.2fr_0.8fr]">
+          <div>
+            <a href="index.html" class="brand-mark mb-8 inline-block">Michael's<small>Pub &amp; Patio</small></a>
+            <div class="mt-8 grid gap-10 sm:grid-cols-2">
+              <div class="text-sm leading-6">
+                <p><span class="font-semibold">Address:<br /></span>208 Pollock St<br />New Bern, NC 28560</p>
+                <p class="mt-5"><span class="font-semibold">Contact:<br /></span>
+                  <a class="contact-link" href="tel:+12526311209">(252) 631-1209</a><br />
+                  <a class="contact-link" href="mailto:Michaelspubandpatio23@gmail.com">Michaelspubandpatio23@gmail.com</a>
+                </p>
+                <div class="mt-5 flex items-center gap-4">
+                  <a class="social-link" href="https://www.facebook.com/MichaelsNewBern/" target="_blank" rel="noopener" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M16.5 6H13.5C12.9477 6 12.5 6.44772 12.5 7V10H16.5C16.6137 9.99748 16.7216 10.0504 16.7892 10.1419C16.8568 10.2334 16.8758 10.352 16.84 10.46L16.1 12.66C16.0318 12.8619 15.8431 12.9984 15.63 13H12.5V20.5C12.5 20.7761 12.2761 21 12 21H9.5C9.22386 21 9 20.7761 9 20.5V13H7.5C7.22386 13 7 12.7761 7 12.5V10.5C7 10.2239 7.22386 10 7.5 10H9V7C9 4.79086 10.7909 3 13 3H16.5C16.7761 3 17 3.22386 17 3.5V5.5C17 5.77614 16.7761 6 16.5 6Z" fill="currentColor"/></svg>
+                  </a>
+                  <a class="social-link" href="https://www.instagram.com/michaelspubandpatio_/" target="_blank" rel="noopener" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M16 3H8C5.23858 3 3 5.23858 3 8V16C3 18.7614 5.23858 21 8 21H16C18.7614 21 21 18.7614 21 16V8C21 5.23858 18.7614 3 16 3ZM19.25 16C19.2445 17.7926 17.7926 19.2445 16 19.25H8C6.20735 19.2445 4.75549 17.7926 4.75 16V8C4.75549 6.20735 6.20735 4.75549 8 4.75H16C17.7926 4.75549 19.2445 6.20735 19.25 8V16ZM16.75 8.25C17.3023 8.25 17.75 7.80228 17.75 7.25C17.75 6.69772 17.3023 6.25 16.75 6.25C16.1977 6.25 15.75 6.69772 15.75 7.25C15.75 7.80228 16.1977 8.25 16.75 8.25ZM12 7.5C9.51472 7.5 7.5 9.51472 7.5 12C7.5 14.4853 9.51472 16.5 12 16.5C14.4853 16.5 16.5 14.4853 16.5 12C16.5027 10.8057 16.0294 9.65957 15.1849 8.81508C14.3404 7.97059 13.1943 7.49734 12 7.5ZM9.25 12C9.25 13.5188 10.4812 14.75 12 14.75C13.5188 14.75 14.75 13.5188 14.75 12C14.75 10.4812 13.5188 9.25 12 9.25C10.4812 9.25 9.25 10.4812 9.25 12Z" fill="currentColor"/></svg>
+                  </a>
+                </div>
+              </div>
+              <div class="text-sm leading-6">
+                <p><span class="font-semibold">Opening times:<br /></span>
+                  Monday – Tuesday:<br />11:00 AM – 9:00 PM<br /><br />
+                  Wednesday – Thursday:<br />11:00 AM – 10:00 PM<br /><br />
+                  Friday – Saturday:<br />11:00 AM – 11:00 PM<br /><br />
+                  Sunday:<br />12:00 PM – 8:30 PM
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative mt-16 flex flex-wrap items-end justify-between gap-6">
+          <nav class="flex flex-wrap gap-x-8 gap-y-3">
+            <a class="footer-link-lg" href="about.html">Our Story</a>
+            <a class="footer-link-lg" href="#menu" data-scroll>Menu</a>
+            <a class="footer-link-lg" href="#guests" data-scroll>Guests</a>
+            <a class="footer-link-lg" href="contact.html">Visit</a>
+          </nav>
+          <img class="pointer-events-none w-40 opacity-80 md:w-56" src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/64402bb8fb5edd45c35f2c07_doodle-grey.svg" alt="" />
+        </div>
+
+        <div class="mt-10 border-t border-cream/15 pt-6">
+          <p class="text-sm">© 2026 Michael's Pub &amp; Patio. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+    <script src="js/main.js?v=9"></script>
+  </body>
+</html>

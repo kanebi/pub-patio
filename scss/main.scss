@@ -1,0 +1,762 @@
+// BurgerSite recreation — brand tokens and doodle-driven UI
+// Matches https://burgersite.webflow.io/
+
+$ink: #181818;
+$cream: #fff9f0;
+$sauce: #e31524;
+$bun: #e39e43;
+$pickle: #05c167;
+$doodle-blue: #493aff;
+$overlay: rgba(29, 29, 29, 0.9);
+
+$font-display: "Barrio", Georgia, sans-serif;
+$font-body: "Work Sans", sans-serif;
+
+$cdn: "https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8";
+
+:root {
+  --ink: #{$ink};
+  --cream: #{$cream};
+  --sauce: #{$sauce};
+  --bun: #{$bun};
+  --pickle: #{$pickle};
+  --doodle-blue: #{$doodle-blue};
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: $ink;
+  color: $cream;
+  font-family: $font-body;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-display {
+  font-family: $font-display;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  margin: 0;
+}
+
+h1 { font-size: 6.375rem; line-height: 1.2; }
+h2 { font-size: 3.5rem; line-height: 1.2; }
+h3 { font-size: 3rem; line-height: 1.2; }
+h4,
+.heading-h4 {
+  font-family: $font-display;
+  font-size: 2rem;
+  line-height: 1.3;
+}
+
+.heading-h5 {
+  font-family: $font-body;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.08rem;
+  line-height: 1.4;
+}
+
+.text-medium { font-size: 1.125rem; line-height: 1.5; }
+.text-large { font-size: 2rem; line-height: 1.2; }
+.text-small { font-size: 0.875rem; line-height: 1.5; }
+
+@media screen and (max-width: 991px) {
+  h1 { font-size: 3.25rem; }
+  h2 { font-size: 2.75rem; }
+  h3 { font-size: 2.25rem; }
+  h4, .heading-h4 { font-size: 1.75rem; }
+
+  .special-offer_container { width: 90vw; }
+  .doodle-yellow_gallery { left: -33%; }
+  .doodle-arrow_gallery { right: -18%; }
+}
+
+@media screen and (max-width: 767px) {
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2.25rem; }
+  h3 { font-size: 2rem; }
+  h4, .heading-h4 { font-size: 1.5rem; }
+  .heading-h5 { font-size: 1.25rem; }
+  .text-medium { font-size: 1rem; }
+  .text-large { font-size: 1.125rem; }
+
+  .section_gallery { padding-top: 4rem; padding-bottom: 4rem; }
+}
+
+@media screen and (max-width: 479px) {
+  .special-offer_container {
+    padding-top: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .doodle-spiral-special_offer { bottom: -7%; }
+}
+
+a {
+  color: inherit;
+}
+
+// ---------- Buttons ----------
+.btn-doodle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  font-family: $font-display;
+  font-size: 20px;
+  line-height: 1.5;
+  color: $cream;
+  text-decoration: none;
+  isolation: isolate;
+  overflow: visible;
+
+  .btn-label {
+    position: relative;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 100% 10px;
+    padding-bottom: 4px;
+  }
+
+  &.is-cream .btn-label {
+    background-image: url("#{$cdn}/643e9aa24977bfdaef55c867_bottom-doodle_button.svg");
+  }
+
+  &.is-white .btn-label {
+    background-image: url("#{$cdn}/643f11d27c151b4be37b8eb6_line_white.svg");
+  }
+
+  &.is-black {
+    color: $ink;
+
+    .btn-label {
+      background-image: url("#{$cdn}/644011559de4ec424b84f137_black_line.svg");
+    }
+  }
+
+  .button-hover_animation {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.navbar_link {
+  display: inline-flex;
+  align-items: flex-start;
+  overflow: hidden;
+  height: 1.5em;
+  color: inherit;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.navbar-link_label {
+  display: block;
+  text-shadow: 0 32px 0 currentColor;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.navbar_link:hover .navbar-link_label,
+.navbar_link:focus-visible .navbar-link_label {
+  transform: translate3d(0, -32px, 0);
+}
+
+// ---------- Hero doodle underlines ----------
+.hero-underline {
+  position: relative;
+  display: inline;
+  white-space: nowrap;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: -4%;
+    right: -4%;
+    bottom: -0.08em;
+    height: 0.42em;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 100% 100%;
+    pointer-events: none;
+  }
+
+  &.is-red::after {
+    background-image: url("#{$cdn}/643eaeca182912d63ce60785_doodle_hero_01.svg");
+  }
+
+  &.is-yellow::after {
+    background-image: url("#{$cdn}/643eaeca9d130d8612fee746_doodle_hero_02.svg");
+    height: 0.55em;
+    bottom: -0.18em;
+  }
+}
+
+.heading-hero {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-image {
+  display: block;
+  width: min(60vw, 720px);
+  max-width: 80%;
+  margin: 1.5rem auto 0;
+  border: 5px solid $cream;
+  box-shadow: 0 24px 40px rgba(0, 0, 0, 0.45);
+  transform-origin: 50% 40%;
+  will-change: transform;
+}
+
+.home-photos {
+  position: relative;
+  min-height: 18rem;
+
+  &.is-modal {
+    margin-top: 4rem;
+    min-height: 22rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .home-photos { min-height: 16rem; }
+  .home-photos.is-modal { min-height: 18rem; }
+}
+
+.home-photo {
+  position: absolute;
+  width: 48%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 5px solid $cream;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.42);
+
+  &.is-1 { left: 0; top: 12%; transform: rotate(-9deg); z-index: 2; }
+  &.is-2 { right: 2%; top: 0; transform: rotate(8deg); z-index: 3; }
+  &.is-3 { left: 8%; bottom: 0; transform: rotate(5deg); z-index: 4; }
+  &.is-4 { right: 0; bottom: 2%; width: 52%; transform: rotate(-6deg); z-index: 5; }
+}
+
+.hero-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 120px;
+  background: linear-gradient(to top, $ink, transparent);
+  pointer-events: none;
+}
+
+// ---------- Nav ----------
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: $ink;
+}
+
+.menu-icon {
+  width: 28px;
+  height: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  span {
+    display: block;
+    height: 2px;
+    background: $bun;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+}
+
+.nav-open .menu-icon span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.nav-open .menu-icon span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-open .menu-icon span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  background: $ink;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.75rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+
+  &.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  a {
+    font-family: $font-body;
+    font-size: 1.25rem;
+    color: $cream;
+    text-decoration: none;
+  }
+}
+
+body.nav-open,
+body.modal-open {
+  overflow: hidden;
+}
+
+// ---------- About boxes ----------
+.about-hero__inner {
+  position: relative;
+}
+
+.about-hero__photo {
+  display: block;
+  width: min(22rem, 100%);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  margin-top: 2.5rem;
+  border: 5px solid $cream;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.42);
+  transform: rotate(7deg);
+}
+
+@media screen and (min-width: 1100px) {
+  .about-hero__inner {
+    min-height: 22rem;
+  }
+
+  .about-hero__photo {
+    position: absolute;
+    top: 1.25rem;
+    left: 50rem;
+    right: 0;
+    width: auto;
+    max-width: 20rem;
+    margin-top: 0;
+    margin-left: auto;
+  }
+}
+
+.about-box {
+  border: 1px solid rgba(255, 249, 240, 0.85);
+  border-radius: 40px;
+  padding: 2.5rem 2rem;
+}
+
+.about-doodle {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+}
+
+// ---------- Menu cards ----------
+.section_menu {
+  scroll-margin-top: 5.5rem;
+}
+
+.menu-stack {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-card {
+  position: sticky;
+  top: 5.75rem;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  max-height: calc(100dvh - 7rem);
+  margin: 0 0 min(70vh, 32rem);
+  padding: 2rem 2rem 0;
+  overflow: hidden;
+  color: $cream;
+  border: 2px solid $cream;
+  border-radius: 1.5rem;
+
+  &.is-red {
+    background: $sauce;
+    z-index: 1;
+  }
+
+  &.is-yellow {
+    background: $bun;
+    color: $ink;
+    z-index: 2;
+  }
+
+  &.is-green {
+    background: $pickle;
+    color: $ink;
+  }
+
+  &.is-cream {
+    background: $cream;
+    color: $ink;
+  }
+
+  &:nth-child(1) { z-index: 1; }
+  &:nth-child(2) { z-index: 2; }
+  &:nth-child(3) { z-index: 3; }
+  &:nth-child(4) { z-index: 4; }
+  &:nth-child(5) { z-index: 5; }
+  &:nth-child(6) { z-index: 6; }
+
+  &:last-child { margin-bottom: 2rem; }
+}
+
+.menu-scribble {
+  position: absolute;
+  width: min(420px, 110%);
+  max-width: none;
+  right: -12%;
+  top: 8%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.menu-photo {
+  position: relative;
+  z-index: 1;
+  width: min(280px, 42vw);
+  max-width: 100%;
+  margin-left: auto;
+  display: block;
+}
+
+.menu-kicker {
+  font-family: $font-display;
+  font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+  padding: 1.25rem 0 1.5rem;
+}
+
+// ---------- Gallery ----------
+.section_gallery {
+  overflow: hidden;
+  padding: 6rem 5%;
+}
+
+.gallery_container {
+  position: relative;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.doodle-yellow_gallery {
+  z-index: 1;
+  height: auto;
+  max-width: none;
+  position: absolute;
+  top: -16%;
+  left: -6%;
+  pointer-events: none;
+}
+
+.doodle-arrow_gallery {
+  z-index: 1;
+  object-fit: fill;
+  height: auto;
+  max-width: none;
+  position: absolute;
+  top: 75%;
+  right: -2%;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.images-gallery_wrapper {
+  display: flex;
+  column-gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transform: translate3d(600px, 0, 0) rotate(-5deg);
+  will-change: transform;
+}
+
+.image_gallery {
+  width: 375px;
+  max-width: none;
+  height: 375px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid $cream;
+}
+
+@media screen and (max-width: 991px) {
+  .image_gallery {
+    width: 260px;
+    height: 260px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .image_gallery {
+    width: 180px;
+    height: 180px;
+  }
+
+  .images-gallery_wrapper {
+    column-gap: 0.65rem;
+  }
+
+  .section_gallery {
+    padding: 1.75rem 5%;
+  }
+
+  .doodle-yellow_gallery {
+    width: 42vw;
+    max-width: 10.5rem;
+    top: -6%;
+    left: -2%;
+  }
+
+  .doodle-arrow_gallery {
+    width: 38vw;
+    max-width: 9.5rem;
+    height: auto;
+    top: auto;
+    right: 0;
+    bottom: -4%;
+  }
+}
+
+// ---------- Special offer ----------
+.section_special-offer {
+  padding: 6rem 5%;
+}
+
+.special-offer_container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+  width: 60vw;
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3.5rem;
+  text-align: center;
+  border: 2px solid $cream;
+  border-radius: 1.5rem;
+  position: relative;
+  overflow: visible;
+}
+
+.special-offer-header_wrapper {
+  display: flex;
+  justify-content: center;
+  column-gap: 2rem;
+}
+
+.special-offer_span {
+  position: relative;
+}
+
+.doodle_special-offer {
+  width: 150%;
+  max-width: none;
+  height: 120%;
+  position: absolute;
+  bottom: 0;
+  left: -26%;
+  right: 0;
+  pointer-events: none;
+}
+
+.doodle-spiral-special_offer {
+  height: auto;
+  position: absolute;
+  top: auto;
+  right: 0;
+  bottom: -11%;
+  left: 4%;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 767px) {
+  .section_special-offer {
+    padding: 0.75rem;
+  }
+
+  .special-offer_container {
+    width: auto;
+    max-width: none;
+    min-height: calc(100dvh - 1.5rem);
+    margin: 0;
+    border-radius: 1.5rem;
+    padding: 2.5rem 1.5rem 3.5rem;
+    justify-content: center;
+  }
+
+  .special-offer-header_wrapper {
+    column-gap: 1rem;
+  }
+}
+
+// ---------- FAQ ----------
+.faq-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  padding: 1.5rem 0 2rem;
+  border-top: 1px solid rgba(255, 249, 240, 0.18);
+}
+
+@media (min-width: 768px) {
+  .faq-row {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 2rem;
+    padding: 2rem 0 2.5rem;
+  }
+}
+
+// ---------- Modal ----------
+.order-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: none;
+  align-items: stretch;
+  justify-content: center;
+
+  &.is-open {
+    display: flex;
+  }
+}
+
+.order-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: $overlay;
+}
+
+.order-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  background: $ink;
+  padding: 7.5rem 1.75rem 7rem;
+  transform: translateY(100%);
+  transition: transform 0.45s ease;
+  overflow-y: auto;
+}
+
+.order-modal.is-open .order-modal__panel {
+  transform: translateY(0);
+}
+
+.order-modal__panel h2 {
+  margin-top: 0.5rem;
+}
+
+// ---------- Reveal ----------
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  will-change: opacity, transform;
+
+  &.is-in {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+
+  &.is-in { opacity: 1; }
+}
+
+.doodle-in {
+  opacity: 0;
+  transition: opacity 1s ease 0.15s;
+
+  &.is-in { opacity: 1; }
+}
+
+// ---------- Footer social ----------
+.social-link {
+  color: $bun;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.footer-link-lg {
+  font-family: $font-display;
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  text-decoration: none;
+}
+
+.legal-link {
+  color: $bun;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.contact-link {
+  color: $bun;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (min-width: 992px) {
+  .hero-image {
+    width: min(42vw, 680px);
+    max-width: 42%;
+  }
+
+  .menu-card {
+    padding: 2.5rem 3rem 0;
+  }
+
+  .about-box {
+    padding: 3rem 3.5rem;
+  }
+}
