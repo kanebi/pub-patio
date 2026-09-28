@@ -154,6 +154,27 @@
     });
   });
 
+  document.querySelectorAll(".dish-card").forEach((card, i) => {
+    card.dataset.delay = String((i % 4) * 80);
+  });
+
+  const jumps = document.querySelectorAll("[data-menu-jump]");
+  const boards = document.querySelectorAll(".menu-board");
+  if (jumps.length && boards.length) {
+    const setActive = (id) => {
+      jumps.forEach((a) => a.classList.toggle("is-active", a.getAttribute("href") === `#${id}`));
+    };
+    const spy = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: "-35% 0px -55% 0px", threshold: 0.05 }
+    );
+    boards.forEach((board) => spy.observe(board));
+  }
+
   const form = document.querySelector("[data-contact-form]");
   if (form) {
     form.addEventListener("submit", (event) => {

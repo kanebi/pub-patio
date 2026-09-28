@@ -8,13 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Barrio&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="icon"
-      href="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/64e7923d2a7d9a036e0733e0_favicon-burgersite.png"
-    />
+    <link rel="icon" href="images/logo.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -28,7 +25,7 @@
               pickle: "#05C167",
             },
             fontFamily: {
-              display: ["Barrio", "Georgia", "sans-serif"],
+              display: ["Bebas Neue", "Impact", "sans-serif"],
               sans: ["Work Sans", "sans-serif"],
             },
             maxWidth: { site: "72rem" },
@@ -36,7 +33,7 @@
         },
       };
     </script>
-    <link rel="stylesheet" href="css/main.css?v=11" />
+    <link rel="stylesheet" href="css/main.css?v=18" />
   </head>
   <body class="bg-ink text-cream font-sans">
     <div class="order-modal" data-order-modal>
@@ -61,10 +58,10 @@
 
     <header class="site-header">
       <div class="mx-auto flex max-w-site items-center justify-between px-6 py-4 md:px-10">
-        <a href="index.html" class="brand-mark" aria-label="home">Michael's<small>Pub &amp; Patio</small></a>
+        <a href="index.html" class="brand-mark" aria-label="home"><img src="images/logo.png" alt="Michael's Pub & Patio" /></a>
         <nav class="hidden items-center gap-8 lg:flex">
           <a class="navbar_link" href="about.html"><span class="navbar-link_label">Our Story</span></a>
-          <a class="navbar_link" href="index.html#menu"><span class="navbar-link_label">Menu</span></a>
+          <a class="navbar_link" href="menu.html"><span class="navbar-link_label">Menu</span></a>
           <a class="navbar_link" href="index.html#guests"><span class="navbar-link_label">Guests</span></a>
           <a class="navbar_link" href="contact.html"><span class="navbar-link_label">Visit</span></a>
           <a class="btn-doodle is-cream" href="#" data-open-order><span class="btn-label">call to order</span></a>
@@ -77,7 +74,7 @@
 
     <div class="nav-overlay lg:hidden" data-nav-overlay>
       <a href="about.html">Our Story</a>
-      <a href="index.html#menu">Menu</a>
+      <a href="menu.html">Menu</a>
       <a href="index.html#guests">Guests</a>
       <a href="contact.html">Visit</a>
       <a class="btn-doodle is-cream mt-4" href="#" data-open-order><span class="btn-label">call to order</span></a>
@@ -140,11 +137,11 @@
 
     <footer class="px-6 pb-10 md:px-10">
       <div class="mx-auto max-w-site border-t border-cream/15 pt-8 flex flex-wrap items-center justify-between gap-4">
-        <a href="index.html" class="brand-mark">Michael's<small>Pub &amp; Patio</small></a>
+        <a href="index.html" class="brand-mark is-footer"><img src="images/logo.png" alt="Michael's Pub & Patio" /></a>
         <p class="text-sm">© 2026 Michael's Pub &amp; Patio. All rights reserved.</p>
       </div>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-    <script src="js/main.js?v=9"></script>
+    <script src="js/main.js?v=10"></script>
   </body>
 </html>

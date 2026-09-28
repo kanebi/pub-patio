@@ -12,13 +12,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Barrio&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23181818'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%23E39E43' font-family='Georgia,serif'%3EM%3C/text%3E%3C/svg%3E"
-    />
+    <link rel="icon" href="images/logo.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -32,7 +29,7 @@
               pickle: "#05C167",
             },
             fontFamily: {
-              display: ["Barrio", "Georgia", "sans-serif"],
+              display: ["Bebas Neue", "Impact", "sans-serif"],
               sans: ["Work Sans", "sans-serif"],
             },
             maxWidth: { site: "72rem" },
@@ -40,7 +37,7 @@
         },
       };
     </script>
-    <link rel="stylesheet" href="css/main.css?v=16" />
+    <link rel="stylesheet" href="css/main.css?v=18" />
   </head>
   <body class="bg-ink text-cream font-sans">
     <div class="order-modal" data-order-modal>
@@ -68,12 +65,11 @@
     <header class="site-header">
       <div class="mx-auto flex max-w-site items-center justify-between px-6 py-4 md:px-10">
         <a href="index.html" class="brand-mark" aria-label="home">
-          Michael's
-          <small>Pub &amp; Patio</small>
+          <img src="images/logo.png" alt="Michael's Pub & Patio" />
         </a>
         <nav class="hidden items-center gap-8 lg:flex">
           <a class="navbar_link" href="about.html"><span class="navbar-link_label">Our Story</span></a>
-          <a class="navbar_link" href="#menu" data-scroll><span class="navbar-link_label">Menu</span></a>
+          <a class="navbar_link" href="menu.html"><span class="navbar-link_label">Menu</span></a>
           <a class="navbar_link" href="#guests" data-scroll><span class="navbar-link_label">Guests</span></a>
           <a class="navbar_link" href="contact.html"><span class="navbar-link_label">Visit</span></a>
           <a class="btn-doodle is-cream" href="#" data-open-order><span class="btn-label">call to order</span></a>
@@ -86,7 +82,7 @@
 
     <div class="nav-overlay lg:hidden" data-nav-overlay>
       <a href="about.html">Our Story</a>
-      <a href="#menu" data-scroll>Menu</a>
+      <a href="menu.html">Menu</a>
       <a href="#guests" data-scroll>Guests</a>
       <a href="contact.html">Visit</a>
       <a class="btn-doodle is-cream mt-4" href="#" data-open-order><span class="btn-label">call to order</span></a>
@@ -153,6 +149,7 @@
             <p class="text-medium text-cream/80">
               Pub classics with a jerk-spiced signature — hand-pattied burgers, jumbo wings, and a house jerk sauce that shows up where you least expect it.
             </p>
+            <a class="btn-doodle is-cream mt-8 inline-flex" href="menu.html"><span class="btn-label">See the full menu</span></a>
           </div>
 
           <div class="menu-stack">
@@ -384,7 +381,7 @@
       <div class="mx-auto max-w-site reveal-fade">
         <div class="grid gap-12 md:grid-cols-[1.2fr_0.8fr]">
           <div>
-            <a href="index.html" class="brand-mark mb-8 inline-block">Michael's<small>Pub &amp; Patio</small></a>
+            <a href="index.html" class="brand-mark is-footer mb-8 inline-block"><img src="images/logo.png" alt="Michael's Pub & Patio" /></a>
             <div class="mt-8 grid gap-10 sm:grid-cols-2">
               <div class="text-sm leading-6">
                 <p><span class="font-semibold">Address:<br /></span>208 Pollock St<br />New Bern, NC 28560</p>
@@ -416,7 +413,7 @@
         <div class="relative mt-16 flex flex-wrap items-end justify-between gap-6">
           <nav class="flex flex-wrap gap-x-8 gap-y-3">
             <a class="footer-link-lg" href="about.html">Our Story</a>
-            <a class="footer-link-lg" href="#menu" data-scroll>Menu</a>
+            <a class="footer-link-lg" href="menu.html">Menu</a>
             <a class="footer-link-lg" href="#guests" data-scroll>Guests</a>
             <a class="footer-link-lg" href="contact.html">Visit</a>
           </nav>
@@ -430,6 +427,6 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-    <script src="js/main.js?v=9"></script>
+    <script src="js/main.js?v=10"></script>
   </body>
 </html>
