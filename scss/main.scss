@@ -746,60 +746,7 @@ body.modal-open {
   text-underline-offset: 3px;
 }
 
-.menu-page__hero {
-  max-width: 72rem;
-  margin: 0 auto;
-  padding: 4.5rem 1.5rem 2rem;
-  text-align: center;
-}
-
-.menu-jump {
-  position: sticky;
-  top: 4.4rem;
-  z-index: 40;
-  display: flex;
-  gap: 0.5rem;
-  overflow-x: auto;
-  padding: 0.75rem 5%;
-  background: rgba(24, 24, 24, 0.92);
-}
-
-.menu-jump a {
-  flex: 0 0 auto;
-  font-family: $font-display;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 0.35rem 0.7rem;
-  border: 1px solid rgba(255, 249, 240, 0.2);
-  border-radius: 999px;
-  text-decoration: none;
-}
-
-.menu-jump a.is-active,
-.menu-jump a:hover {
-  background: $sauce;
-  border-color: $sauce;
-}
-
-.dish-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-}
-
-@media (min-width: 760px) {
-  .dish-grid { grid-template-columns: 1fr 1fr; }
-}
-
-.dish-card {
-  display: grid;
-  grid-template-columns: 7.25rem 1fr;
-  gap: 1rem;
-  background: #211d1b;
-  border: 1px solid rgba(255, 249, 240, 0.12);
-  border-radius: 1rem;
-  overflow: hidden;
-}
+// Menu page layout lives in css/main.css (.menu-room, .menu-reader).
 
 @media (min-width: 992px) {
   .hero-image {

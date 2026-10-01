@@ -36,7 +36,8 @@
         },
       };
     </script>
-    <link rel="stylesheet" href="css/main.css?v=18" />
+    <link rel="preload" as="image" href="images/menu-1.jpg" />
+    <link rel="stylesheet" href="css/main.css?v=20" />
   </head>
   <body class="bg-ink text-cream font-sans">
     <div class="order-modal" data-order-modal>
@@ -87,331 +88,80 @@
       <a class="btn-doodle is-cream mt-4" href="#" data-open-order><span class="btn-label">call to order</span></a>
     </div>
 
-    <main class="menu-page">
-      <section class="menu-page__hero">
-        <p class="menu-page__eyebrow">208 Pollock St · New Bern, NC · (252) 631-1209</p>
-        <h1>The Menu</h1>
-        <p class="text-medium mx-auto mt-4 max-w-xl text-cream/75">
-          Appetizers through dinners, just like the printed board. Handhelds come with seasoned fries; onion rings or coleslaw on request.
-        </p>
+    <main class="menu-room">
+      <section class="menu-spread" id="menu-page-1" data-menu-spread>
+        <div class="menu-spread__head">
+          <p class="menu-page__eyebrow">208 Pollock St · New Bern, NC</p>
+          <h1>The Menu</h1>
+        </div>
+        <a class="menu-sheet" href="images/menu-1.jpg" data-open-menu="0">
+          <img
+            src="images/menu-1.jpg"
+            width="1650"
+            height="2550"
+            alt="Printed menu, page one: appetizers, soup, salads, and handhelds at Michael's Pub & Patio."
+            fetchpriority="high"
+          />
+          <span class="menu-sheet__cta">Read this page</span>
+        </a>
+        <p class="menu-spread__caption">Page 1 · Appetizers, soup, salads &amp; handhelds</p>
       </section>
 
-      <nav class="menu-jump" aria-label="Menu sections">
-        <a href="#appetizers" data-menu-jump>Appetizers</a>
-        <a href="#soup" data-menu-jump>Soup</a>
-        <a href="#salads" data-menu-jump>Salads</a>
-        <a href="#handhelds" data-menu-jump>Handhelds</a>
-        <a href="#dinners" data-menu-jump>Dinners</a>
-        <a href="#pasta" data-menu-jump>Pasta</a>
-        <a href="#desserts" data-menu-jump>Desserts</a>
-        <a href="#drinks" data-menu-jump>Drinks</a>
+      <section class="menu-spread" id="menu-page-2" data-menu-spread>
+        <div class="menu-spread__head">
+          <p class="menu-page__eyebrow">Same board as the table</p>
+          <h2>Dinners &amp; drinks</h2>
+        </div>
+        <a class="menu-sheet" href="images/menu-2.jpg" data-open-menu="1">
+          <img
+            src="images/menu-2.jpg"
+            width="1650"
+            height="2550"
+            alt="Printed menu, page two: dinners, pasta, desserts, drinks, and sides at Michael's Pub & Patio."
+            loading="lazy"
+          />
+          <span class="menu-sheet__cta">Read this page</span>
+        </a>
+        <p class="menu-spread__caption">Page 2 · Dinners, pasta, desserts &amp; drinks</p>
+      </section>
+
+      <nav class="menu-dock" data-menu-dock aria-label="Menu pages">
+        <a href="#menu-page-1" class="is-active"><span>01</span> Appetizers</a>
+        <a href="#menu-page-2"><span>02</span> Dinners</a>
       </nav>
 
-      <section class="menu-board" id="appetizers">
-        <h2 class="menu-board__title">Appetizers</h2>
-        <div class="dish-grid">
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/pubnachos.jpg" alt="Pub Nachos at Michael's Pub & Patio" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Pub Nachos</h3><span>$16.29</span></div>
-              <p>Warm corn tortilla chips layered high with house-made chili, melted queso and shredded cheese, black olives, tomatoes, jalapeños, and chives. Salsa and sour cream on the side.</p>
-              <p class="dish-card__note">Add grilled chicken $6.99</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/motzerella_sticks.jpg" alt="Mozzarella sticks" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Mozzarella Sticks</h3><span>$8.99</span></div>
-              <p>Six sticks, crispy outside with melted mozzarella inside, and marinara for dipping.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/fried_mushrooms.jpg" alt="Fried mushrooms" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Fried Mushrooms</h3><span>$8.99</span></div>
-              <p>Lightly battered mushrooms cooked to a golden crunch, served hot with creamy house-made ranch.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/chx_wings.jpg" alt="Chicken wings" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Chicken Wings</h3><span>$16.49</span></div>
-              <p>Twelve fire-roasted glazed wings tossed in Mild Buffalo, Jerk, Garlic Parmesan, Honey Mustard, BBQ, or Plain.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/pubnachos.jpg" alt="Spinach artichoke dip" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Spinach Artichoke Dip</h3><span>$12.29</span></div>
-              <p>Spinach and artichokes blended with Parmesan and Romano, served with white corn tortilla chips.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/fried_calamari.jpg" alt="Fried pickle chips" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Fried Pickle Chips</h3><span>$8.99</span></div>
-              <p>Sliced pickles, lightly breaded and seasoned, with a side of house ranch. They can be addicting.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/roast_beef_gravy.jpg" alt="Michael's meatball marinara" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Michael's Meatball Marinara</h3><span>$8.99</span></div>
-              <p>Homemade meatballs in marinara, finished with mozzarella and crispy garlic bread.</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="menu-board" id="soup">
-        <h2 class="menu-board__title">Soup</h2>
-        <div class="dish-grid">
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/roast_beef_gravy.jpg" alt="Soup of the day" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Soup of the Day</h3><span>Cup $4.48 · Bowl $7.50</span></div>
-              <p>Ask your server what is simmering today.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/pubnachos.jpg" alt="Homemade chili" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Homemade Chili</h3><span>Cup $4.49 · Bowl $7.50</span></div>
-              <p>House chili, by the cup or the bowl.</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="menu-board" id="salads">
-        <h2 class="menu-board__title">Salads</h2>
-        <p class="menu-board__lead">Add grilled or fried chicken, grilled or fried shrimp, or blackened tuna +$9.99. Dressings: House Ranch, Blue Cheese, Italian, Honey Mustard, Balsamic Vinaigrette, Thousand Island, Oil &amp; Vinegar.</p>
-        <div class="dish-grid">
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/chef_salad.jpg" alt="House salad" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>House Salad</h3><span>$5.99</span></div>
-              <p>Lettuce, tomato, cucumber, onion, shredded cheese, and croutons with your choice of dressing.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/chef_salad.jpg" alt="Chef salad" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Chef Salad</h3><span>$15.99</span></div>
-              <p>Hearty house salad with ham, turkey, bacon, shredded cheese, and croutons.</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="menu-board" id="handhelds">
-        <h2 class="menu-board__title">Handhelds</h2>
-        <p class="menu-board__lead">Served with seasoned fries. Onion rings or coleslaw on request. Extra charge for an additional side.</p>
-        <div class="dish-grid">
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/mahi_tacos.jpg" alt="Tacos" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Tacos</h3><span>$16.99</span></div>
-              <p>A local favorite. Fried or grilled shrimp, or grilled mahi, on warm tortillas with house coleslaw, mango salsa, avocado, and jerk drizzle.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/philly_cheesesteak.jpg" alt="Philly cheesesteak" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Philly Cheesesteak</h3><span>$15.79</span></div>
-              <p>Marinated chopped sirloin, grilled with peppers and onions, melted provolone on a crispy hoagie roll.</p>
-              <p class="dish-card__note">Add mushrooms $3.99</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/pub_club_sandwich.jpg" alt="Pub club" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Pub Club</h3><span>$16.29</span></div>
-              <p>Texas toast stacked with ham, turkey, smoked bacon, Swiss, lettuce, tomato, and mayo.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/roast_beef_gravy.jpg" alt="Italian meatball hoagie" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Italian Meatball Hoagie</h3><span>$15.79</span></div>
-              <p>House meatballs in marinara, smothered in mozzarella on a hoagie roll.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/shrimp_burgers.jpg" alt="Shrimp burger" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Shrimp Burger</h3><span>$13.49</span></div>
-              <p>Our crispy fried-to-perfection shrimp burger on a brioche bun with a refreshing crunch of slaw.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/burger.jpg" alt="Cheeseburger" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Cheeseburger</h3><span>$13.99</span></div>
-              <p>Hand-selected juicy beef on brioche with lettuce, tomato, onion, pickle, and American, Swiss, or provolone.</p>
-              <p class="dish-card__note">Add bacon $2.99 · chili $1.99 · avocado $1.48 · fried onion ring $0.76 · egg $1.49 · Jamaican jerk $0.76 · extra patty $6.99</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/ny_rueben.jpg" alt="New York Reuben" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>NY Reuben</h3><span>$15.29</span></div>
-              <p>Pastrami, sauerkraut, Swiss, and sauce piled high on marbled rye.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/fried_chicken_sandwich.jpg" alt="Crispy chicken deluxe" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Crispy Chicken Deluxe</h3><span>$12.89</span></div>
-              <p>Crispy fried chicken on brioche with lettuce, tomato, pickle, and mayo.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/burger4.jpg" alt="Everything cheeseburger" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Everything Cheeseburger</h3><span>$17.99</span></div>
-              <p>The fully loaded house burger: bacon, fried egg, avocado, chili, two fried onion rings, and jerk sauce.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/grilled_chx_pasta.jpg" alt="Chicken or shrimp wrap" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Chicken or Shrimp Wrap</h3><span>$15.69</span></div>
-              <p>Warm flour tortilla with lettuce, tomato, and fried or grilled chicken or shrimp, finished with ranch, buffalo, or bang-bang.</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="menu-board" id="dinners">
-        <h2 class="menu-board__title">Dinners</h2>
-        <p class="menu-board__lead">All dinners served with a choice of two house sides.</p>
-        <div class="dish-grid">
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/allyoucaneatshrimp.jpg" alt="Shrimp plate" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Shrimp Plate</h3><span>$21.99</span></div>
-              <p>A generous portion of hand-prepared shrimp served fried or grilled, with hush puppies.</p>
-              <p class="dish-card__note">Add bang-bang sauce $2.00</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/chef_salad.jpg" alt="Veggie plate" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Veggie Plate</h3><span>$14.99</span></div>
-              <p>Build your plate: four house sides, or two sides plus a house salad or a cup of soup.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/fried_chicken_sandwich.jpg" alt="Fried chicken tender plate" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Fried Chicken Tender Plate</h3><span>$18.99</span></div>
-              <p>Five crispy golden tenders with honey mustard, barbecue, or house ranch, plus two house sides.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/fried_calamari.jpg" alt="Fried oyster plate" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Fried Oyster Plate</h3><span>$23.49</span></div>
-              <p>Wild-harvested select oysters, lightly breaded and fried, with hush puppies and two sides.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/fried_flounder.jpg" alt="Sauteed mussels" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Sauteed Mussels</h3><span>$15.89</span></div>
-              <p>Wild mussels in butter, garlic, tomatoes, and onion, reduced in white wine, with crusty garlic bread.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/grilled_mahi.jpg" alt="Ahi tuna" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Ahi Tuna</h3><span>$19.99</span></div>
-              <p>An 8-ounce yellowfin steak, grilled to temperature and finished with blackened seasoning.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/fried_flounder2.jpg" alt="Fish fry plate" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Fish Fry Plate</h3><span>$15.99</span></div>
-              <p>Southern fried flounder with hush puppies and two house sides.</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="menu-board" id="pasta">
-        <h2 class="menu-board__title">Pasta</h2>
-        <p class="menu-board__lead">Add a house salad +$4.</p>
-        <div class="dish-grid">
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/grilled_chx_pasta.jpg" alt="Spaghetti and meatballs" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Spaghetti &amp; Meatballs</h3><span>$15.99</span></div>
-              <p>House spaghetti tossed in tomato sauce with two tender meatballs, garlic, herbs, and Parmesan. Served with crusty garlic bread.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/grilled_chx_pasta.jpg" alt="Alfredo pasta" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Alfredo</h3><span>$17.49</span></div>
-              <p>Tender fettuccine in velvety Alfredo with steamed broccoli, or your choice of juicy grilled chicken or buttery grilled shrimp. Garlic bread on the side.</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="menu-board" id="desserts">
-        <h2 class="menu-board__title">Desserts</h2>
-        <div class="dish-grid">
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/georgia_peach.jpg" alt="Desserts at Michael's" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Ask your server</h3><span>Seasonal</span></div>
-              <p>Ask your server about our dessert selections.</p>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="menu-board" id="drinks">
-        <h2 class="menu-board__title">Drinks &amp; Sides</h2>
-        <div class="dish-grid">
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/all_american_lemonade.jpg" alt="Non-alcoholic beverages" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Non-Alcoholic Beverages</h3><span>Fountain</span></div>
-              <p>Coca-Cola, Diet Coke, Coke Zero, Dr Pepper, Root Beer, Sprite, Fantastica Lemonade, Hi-C Fruit Punch, Tea, Apple Juice, Pineapple Juice, Cranberry Juice.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/georgia_peach.jpg" alt="Mocktail beverages" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Mocktail Beverages</h3><span>Ask your server</span></div>
-              <p>Shirley Temple, Roy Rogers, Fuzzy Bear Tea, Slender Bear Lemonade, Watermelon Bear-y, 1710 Palmer Sipper, Fuzzy Peach Lemonade.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/fried_flounder.jpg" alt="House sides" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>House Sides</h3><span>$2.99</span></div>
-              <p>Seasoned French fries, scratch-made coleslaw, broccoli, collards, fried okra. All dinners include a choice of two.</p>
-            </div>
-          </article>
-          <article class="dish-card reveal">
-            <div class="dish-card__media"><img src="images/fried_mushrooms.jpg" alt="Premium sides" /></div>
-            <div class="dish-card__body">
-              <div class="dish-card__top"><h3>Premium Sides</h3><span>$4.99</span></div>
-              <p>Beer-battered onion rings, mac &amp; cheese, hand-cut zucchini, Pollock Street jumbo, plain baked potato. Add bacon $0.73 or cheese $0.49.</p>
-            </div>
-          </article>
-        </div>
-        <p class="menu-page__disclaimer">18% gratuity added to parties of 8 or more. Consuming raw or undercooked meats, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness.</p>
-        <div class="menu-page__cta">
-          <a class="btn-doodle is-cream" href="#" data-open-order><span class="btn-label">call to order</span></a>
-        </div>
-      </section>
+      <div class="menu-transcript">
+        <h2>Menu text</h2>
+        <p>Appetizers. Pub Nachos $16.29, add grilled chicken $6.99. Mozzarella Sticks $8.99. Fried Mushrooms $8.99. Chicken Wings $16.49. Spinach Artichoke Dip $12.29. Fried Pickle Chips $8.99. Michael's Meatball Marinara $8.99.</p>
+        <p>Soup. Soup of the Day, cup $4.48, bowl $7.50. Homemade Chili, cup $4.49, bowl $7.50.</p>
+        <p>Salads. Add grilled or fried chicken, grilled or fried shrimp, or blackened tuna $9.99. House Salad $5.99. Chef Salad $15.99. Dressings: House Ranch, Blue Cheese, Italian, Honey Mustard, Balsamic Vinaigrette, Thousand Island, Oil and Vinegar.</p>
+        <p>Handhelds, served with seasoned fries. Tacos $16.99. Philly Cheesesteak $15.79, add mushrooms $3.99. Pub Club $16.29. Italian Meatball Hoagie $15.79. Shrimp Burger $13.49. Cheeseburger $13.99. NY Reuben $15.29. Crispy Chicken Deluxe $12.89. Everything Cheeseburger $17.99. Chicken or Shrimp Wrap $15.69.</p>
+        <p>Dinners, choice of two house sides. Shrimp Plate $21.99, add bang-bang sauce $2.00. Veggie Plate $14.99. Fried Chicken Tender Plate $18.99. Fried Oyster Plate $23.49. Sauteed Mussels $15.89. Ahi Tuna $19.99. Fish Fry Plate $15.99.</p>
+        <p>Pasta, add a house salad $4. Spaghetti and Meatballs $15.99. Alfredo $17.49.</p>
+        <p>Desserts. Ask your server about dessert selections.</p>
+        <p>Non-alcoholic beverages: Coca-Cola, Diet Coke, Coke Zero, Dr Pepper, Root Beer, Sprite, lemonade, fruit punch, tea, apple juice, pineapple juice, cranberry juice. Mocktails: Shirley Temple, Roy Rogers, Fuzzy Bear Tea, Slender Bear Lemonade, Watermelon Bear-y, 1710 Palmer Sipper, Fuzzy Peach Lemonade.</p>
+        <p>House sides $2.99: seasoned fries, coleslaw, broccoli, collards, fried okra. Premium sides $4.99: onion rings, mac and cheese, zucchini, Pollock Street jumbo, baked potato.</p>
+        <p>18% gratuity added to parties of 8 or more. Consuming raw or undercooked meats, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness.</p>
+      </div>
     </main>
+
+    <div class="menu-reader" data-menu-reader hidden>
+      <div class="menu-reader__bar">
+        <p class="menu-reader__title" data-reader-title>Page 1</p>
+        <div class="menu-reader__tools">
+          <button type="button" data-reader-page="0">Page 1</button>
+          <button type="button" data-reader-page="1">Page 2</button>
+          <button type="button" data-zoom="out" aria-label="Zoom out">−</button>
+          <button type="button" data-zoom="fit">Fit</button>
+          <button type="button" data-zoom="read">Read</button>
+          <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
+          <button type="button" data-close-reader aria-label="Close menu">Close</button>
+        </div>
+      </div>
+      <div class="menu-reader__viewport" data-reader-viewport tabindex="0" role="region" aria-label="Printed menu">
+        <img data-reader-image alt="" draggable="false" />
+      </div>
+    </div>
 
     <footer class="footer_component relative px-6 pb-10 pt-16 md:px-10 md:pt-24">
       <div class="mx-auto max-w-site reveal-fade">
@@ -428,6 +178,6 @@
       </div>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-    <script src="js/main.js?v=10"></script>
+    <script src="js/main.js?v=13"></script>
   </body>
 </html>
