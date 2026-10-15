@@ -6,7 +6,6 @@
   const openModalBtns = document.querySelectorAll("[data-open-order]");
   const closeModalBtns = document.querySelectorAll("[data-close-order]");
   const galleryTrack = document.querySelector("[data-gallery-track]");
-  const heroImage = document.querySelector("[data-hero-image]");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const DRAW_END = 66;
@@ -115,8 +114,6 @@
     }
   }
 
-  const heroSection = heroImage?.closest("section");
-
   const updateScrollFx = () => {
     if (galleryTrack) {
       const section = galleryTrack.closest("section");
@@ -130,14 +127,116 @@
         galleryTrack.style.transform = `translate3d(${shift}px, 0, 0) rotate(-5deg)`;
       }
     }
-
-    if (heroImage && heroSection && !reduceMotion) {
-      const travel = Math.max(heroSection.offsetHeight * 0.85, 1);
-      const raw = Math.min(Math.max(window.scrollY / travel, 0), 1);
-      const eased = raw * raw;
-      heroImage.style.transform = `scale(${1 + eased * 1.5})`;
-    }
   };
+
+  // Hero Carousel
+  const heroCarousel = document.querySelector("[data-hero-carousel]");
+  if (heroCarousel) {
+    const slides = Array.from(heroCarousel.querySelectorAll(".hero-carousel__slide"));
+    const dots = Array.from(heroCarousel.querySelectorAll("[data-carousel-dot]"));
+    const prevBtn = heroCarousel.querySelector("[data-carousel-prev]");
+    const nextBtn = heroCarousel.querySelector("[data-carousel-next]");
+    let currentIndex = 0;
+    let timer = null;
+    const intervalMs = 4500;
+
+    const showSlide = (nextIndex) => {
+      currentIndex = (nextIndex + slides.length) % slides.length;
+      slides.forEach((slide, idx) => {
+        const isActive = idx === currentIndex;
+        slide.classList.toggle("is-active", isActive);
+        slide.setAttribute("aria-hidden", !isActive);
+      });
+      dots.forEach((dot, idx) => {
+        const isActive = idx === currentIndex;
+        dot.classList.toggle("is-active", isActive);
+        dot.setAttribute("aria-selected", isActive);
+      });
+    };
+
+    const nextSlide = () => showSlide(currentIndex + 1);
+    const prevSlide = () => showSlide(currentIndex - 1);
+
+    const startAutoPlay = () => {
+      stopAutoPlay();
+      if (!reduceMotion && slides.length > 1) {
+        timer = setInterval(nextSlide, intervalMs);
+      }
+    };
+
+    const stopAutoPlay = () => {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    };
+
+    prevBtn?.addEventListener("click", () => {
+      prevSlide();
+      startAutoPlay();
+    });
+
+    nextBtn?.addEventListener("click", () => {
+      nextSlide();
+      startAutoPlay();
+    });
+
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        const idx = parseInt(dot.getAttribute("data-carousel-dot"), 10);
+        if (!isNaN(idx)) {
+          showSlide(idx);
+          startAutoPlay();
+        }
+      });
+    });
+
+    heroCarousel.addEventListener("mouseenter", stopAutoPlay);
+    heroCarousel.addEventListener("mouseleave", startAutoPlay);
+    heroCarousel.addEventListener("focusin", stopAutoPlay);
+    heroCarousel.addEventListener("focusout", startAutoPlay);
+
+    // Touch swipe support
+    let startX = 0;
+    let startY = 0;
+    heroCarousel.addEventListener(
+      "touchstart",
+      (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      },
+      { passive: true }
+    );
+    heroCarousel.addEventListener(
+      "touchend",
+      (e) => {
+        const diffX = e.changedTouches[0].clientX - startX;
+        const diffY = e.changedTouches[0].clientY - startY;
+        if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+          if (diffX < 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+          startAutoPlay();
+        }
+      },
+      { passive: true }
+    );
+
+    // Keyboard support
+    heroCarousel.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") {
+        prevSlide();
+        startAutoPlay();
+      } else if (e.key === "ArrowRight") {
+        nextSlide();
+        startAutoPlay();
+      }
+    });
+
+    startAutoPlay();
+  }
 
   updateScrollFx();
   window.addEventListener("scroll", updateScrollFx, { passive: true });
