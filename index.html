@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Michael's Pub & Patio | Dog-Friendly Pub in Downtown New Bern, NC</title>
+  <title>Community Gallery | Michael's Pub &amp; Patio | New Bern, NC</title>
   <meta name="description"
-    content="Michael's Pub & Patio is a dog-friendly restaurant and bar in a historic converted home at 208 Pollock St, downtown New Bern, NC. Jerk-spiced pub fare, jumbo wings, burgers, and two outdoor patios." />
+    content="Explore our triple-row seamless infinite scroll photo gallery showcasing happy guests, dog-friendly patio moments, live music, and the welcoming neighborhood atmosphere at Michael's Pub & Patio." />
   <link rel="preconnect" href="https://cdn.prod.website-files.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -36,9 +36,134 @@
     };
   </script>
   <link rel="stylesheet" href="css/main.css?v=21" />
+  <style>
+    /* Infinite Marquee Scroll Animations */
+    @keyframes scrollLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes scrollRight {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
+    .gallery-marquee {
+      display: flex;
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+      user-select: none;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+
+    .gallery-marquee__track-left {
+      display: flex;
+      gap: 1.5rem;
+      width: max-content;
+      animation: scrollLeft 100s linear infinite;
+    }
+
+    /* Extra slow track specifically for the middle row */
+    .gallery-marquee__track-slow {
+      display: flex;
+      gap: 1.5rem;
+      width: max-content;
+      animation: scrollRight 200s linear infinite;
+    }
+
+    /* Pause state when hovered or toggled */
+    .gallery-marquee:hover .gallery-marquee__track-left,
+    .gallery-marquee:hover .gallery-marquee__track-slow,
+    .paused .gallery-marquee__track-left,
+    .paused .gallery-marquee__track-slow {
+      animation-play-state: paused;
+    }
+
+    .gallery-card {
+      background: #FFF9F0;
+      padding: 12px 12px 16px 12px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+      flex-shrink: 0;
+      width: 300px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .gallery-card:hover {
+      transform: scale(1.03);
+    }
+
+    @media (min-width: 768px) {
+      .gallery-card {
+        width: 360px;
+      }
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Lightbox Modal Styles */
+    .lightbox-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.85);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox-modal.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      background: #FFF9F0;
+      padding: 16px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      transform: scale(0.95);
+      transition: transform 0.3s ease;
+    }
+
+    .lightbox-modal.is-open .lightbox-content {
+      transform: scale(1);
+    }
+
+    .lightbox-content img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      display: block;
+    }
+  </style>
 </head>
 
 <body class="bg-ink text-cream font-sans">
+  <!-- Lightbox Modal for Enlarged Photo -->
+  <div class="lightbox-modal" id="lightbox-modal">
+    <div class="absolute inset-0" id="lightbox-backdrop"></div>
+    <div class="lightbox-content relative z-10">
+      <button class="absolute -top-4 -right-4 bg-ink text-cream hover:text-sauce w-10 h-10 rounded-full flex items-center justify-center font-bold text-xl shadow-lg transition-colors cursor-pointer" type="button" aria-label="Close" id="lightbox-close">
+        &times;
+      </button>
+      <img id="lightbox-img" src="" alt="Enlarged gallery view" />
+    </div>
+  </div>
+
+  <!-- Order Modal -->
   <div class="order-modal" data-order-modal>
     <div class="order-modal__backdrop" data-close-order></div>
     <div class="order-modal__panel">
@@ -58,12 +183,13 @@
           <img class="home-photo is-1" src="images/yuengling.jpg" alt="Yuengling" />
           <img class="home-photo is-2" src="images/georgia_peach.jpg" alt="Georgia peach" />
           <img class="home-photo is-3" src="images/all_american_lemonade.jpg" alt="All American lemonade" />
-          <img class="home-photo is-4" src="images/5draftday.jpg" alt="Draft day" />
+          <img class="home-photo is-4" src="images/patio003.jpg" alt="Draft day" />
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Header -->
   <header class="site-header">
     <div class="mx-auto flex max-w-site items-center justify-between px-6 py-4 md:px-10">
       <a href="index.html" class="brand-mark" aria-label="home">
@@ -82,6 +208,7 @@
     </div>
   </header>
 
+  <!-- Mobile Overlay -->
   <div class="nav-overlay lg:hidden" data-nav-overlay>
     <a href="about.html">Our Story</a>
     <a href="menu.html">Menu</a>
@@ -91,430 +218,201 @@
   </div>
 
   <main>
-    <section class="section_hero relative overflow-hidden">
-      <div class="mx-auto max-w-site px-6 pb-6 pt-8 md:px-10 md:pt-14">
-        <div class="hero_banner-wrapper text-center">
-          <h1 class="heading-hero reveal">
-            Good food, good people,<br />
-            <span class="hero-underline is-red">good ol'</span>
-            southern
-            <span class="hero-underline is-yellow">hospitality.</span>
-          </h1>
-          <div class="hero-carousel" data-hero-carousel aria-roledescription="carousel"
-            aria-label="Michael's Pub highlights">
-            <div class="hero-carousel__track">
-              <div class="hero-carousel__slide is-active" aria-roledescription="slide" aria-label="1 of 3">
-                <img src="images/white_party.png" alt="A table spread of food and drinks at Michael's Pub & Patio" />
-              </div>
-              <div class="hero-carousel__slide" aria-roledescription="slide" aria-label="2 of 3" aria-hidden="true">
-                <img src="images/patio_day.jpg" alt="Outdoor patio seating in the daytime" />
-              </div>
-              <div class="hero-carousel__slide" aria-roledescription="slide" aria-label="3 of 3" aria-hidden="true">
-                <img src="images/guests.jpg" alt="Guests dining and enjoying drinks at Michael's" />
-              </div>
-            </div>
+    <!-- Dedicated Community Gallery Triple-Row Marquee Section -->
+    <section class="py-16 md:py-24 overflow-hidden" id="guests">
+      <div class="mx-auto max-w-site px-6 text-center mb-12">
+        <h2 class="reveal text-5xl md:text-5xl font-display">The People Who Make It Special</h2>
+      </div>
 
-            <button class="hero-carousel__arrow is-prev" type="button" aria-label="Previous photo" data-carousel-prev>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
-            </button>
-            <button class="hero-carousel__arrow is-next" type="button" aria-label="Next photo" data-carousel-next>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
+      <!-- Marquee Container with 3 Rows -->
+      <div id="marquee-wrapper" class="space-y-6 w-full relative">
+        
+        <!-- Row 1: Scrolling Left -->
+        <div class="gallery-marquee">
+          <div class="gallery-marquee__track-left">
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/guests.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/couple_dog.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/grace.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/diner000.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img000.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img001.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img002.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img003.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img004.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img005.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/img006.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img007.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img008.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img009.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img010.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img011.jpg" alt="Gallery photo" loading="lazy" /></div>
 
-            <div class="hero-carousel__dots" role="tablist" aria-label="Carousel pagination">
-              <button type="button" class="hero-carousel__dot is-active" role="tab" aria-selected="true"
-                aria-label="Photo 1 of 3" data-carousel-dot="0"></button>
-              <button type="button" class="hero-carousel__dot" role="tab" aria-selected="false"
-                aria-label="Photo 2 of 3" data-carousel-dot="1"></button>
-              <button type="button" class="hero-carousel__dot" role="tab" aria-selected="false"
-                aria-label="Photo 3 of 3" data-carousel-dot="2"></button>
-            </div>
+            <!-- Duplicate Set for Seamless Loop -->
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/guests.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/couple_dog.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/grace.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/diner000.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img000.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img001.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img002.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img003.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img004.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img005.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/img006.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img007.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img008.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img009.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img010.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img011.jpg" alt="Gallery photo" loading="lazy" /></div>
           </div>
         </div>
-      </div>
-      <div class="hero-fade"></div>
-    </section>
 
-    <section class="section_logo">
-      <div class="mx-auto max-w-site px-6 py-16 md:px-10 md:py-20">
-        <div class="logo_component reveal-fade grid items-center gap-10 md:grid-cols-2">
-          <h2 class="heading-h4">
-            Feeling lazy?<br />Call, takeout, or pull up a patio chair.
-          </h2>
-          <div class="home-photos">
-            <img class="home-photo is-1" src="images/yuengling.jpg" alt="Cold Yuengling" />
-            <img class="home-photo is-2" src="images/georgia_peach.jpg" alt="Georgia peach drink" />
-            <img class="home-photo is-3" src="images/all_american_lemonade.jpg" alt="All American lemonade" />
-            <img class="home-photo is-4" src="images/patio_day.jpg" alt="Patio in daylight" />
+        <!-- Row 2: Scrolling Right (Slower Track) -->
+        <div class="gallery-marquee">
+          <div class="gallery-marquee__track-slow">
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/patio_day.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/trivia000.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/thrivia_ad.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/building.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img012.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img013.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img014.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/img015.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img016.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img017.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img018.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img019.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img020.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/img021.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img022.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img023.jpg" alt="Gallery photo" loading="lazy" /></div>
+
+            <!-- Duplicate Set for Seamless Loop -->
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/patio_day.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/trivia000.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/thrivia_ad.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/building.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img012.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img013.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img014.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/img015.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img016.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img017.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img018.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img019.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img020.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/img021.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img022.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img023.jpg" alt="Gallery photo" loading="lazy" /></div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section class="section_about relative overflow-hidden" id="about">
-      <img class="about-doodle doodle-in left-6 top-10 w-16 md:w-24"
-        src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/643ec8abce0c2b8e0554532e_doodle-huricane.svg"
-        alt="" />
-      <img class="about-doodle doodle-in right-8 top-24 w-16 md:w-20"
-        src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/643ec913cf86b12a4545dbea_stars.svg" alt="" />
-      <div class="mx-auto max-w-site px-6 py-16 md:px-10 md:py-24">
-        <div class="about_wrapper relative reveal flex flex-col gap-3">
-          <img class="about-doodle -left-2 -top-6 w-24 md:w-36"
-            src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/643ec799dc766d5c5b55847c_Highlight%2016.svg"
-            alt="" />
-          <div class="about-box relative">
-            <div class="flex flex-wrap items-end gap-4">
-              <h2>Our story</h2>
-              <img class="mb-1 w-36 md:w-44"
-                src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/643ec6b00c952b6d2b0e745f_Arrow3.svg"
-                alt="" />
-            </div>
-          </div>
-          <div class="about-box grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-center">
-            <p class="text-medium max-w-3xl">
-              Housed in a beautifully restored 1850s historic home in downtown New Bern, Michael’s Pub &amp; Patio blends
-              historic Southern charm with a vibrant, laid-back neighborhood vibe. Inside, cozy up by the original dark
-              wood and crackling fireplace, or head out back to our spacious, dog-friendly courtyards for elevated pub
-              classics, wild-caught Gulf shrimp, rotating draft specials, and genuine hospitality.
-            </p>
-            <img class="w-full max-h-64 object-cover" src="images/building.jpg"
-              alt="Michael's Pub &amp; Patio on Pollock Street" />
-          </div>
-        </div>
-      </div>
-    </section>
+        <!-- Row 3: Scrolling Left -->
+        <div class="gallery-marquee">
+          <div class="gallery-marquee__track-left">
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/patio001.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/fam000.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img024.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img025.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img026.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img027.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img028.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img029.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/img030.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img031.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img032.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img033.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img034.jpg" alt="Gallery photo" loading="lazy" /></div>
 
-    <section class="section_menu" id="menu">
-      <div class="mx-auto max-w-site px-6 py-16 md:px-10 md:py-24">
-        <div class="heading-menu_wrapper mx-auto mb-12 max-w-2xl text-center reveal">
-          <h2 class="mb-5">Menu</h2>
-          <p class="text-medium text-cream/80">
-            Pub classics with a jerk-spiced signature — hand-pattied burgers, jumbo wings, and a house jerk sauce that
-            shows up where you least expect it.
-          </p>
-          <a class="btn-doodle is-cream mt-8 inline-flex" href="menu.html"><span class="btn-label">See the full
-              menu</span></a>
-        </div>
-
-        <div class="menu-stack">
-          <article class="menu-card is-yellow">
-            <div class="menu-card-body grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
-              <div class="pb-2">
-                <h3 class="text-ink">The Pub Burger</h3>
-                <p class="text-medium mt-4 max-w-md text-ink">
-                  A hand-selected 6oz beef patty on brioche with lettuce, tomato, onion, and pickle. American, Swiss, or
-                  provolone.
-                </p>
-                <div class="mt-6"><a class="btn-doodle is-black" href="#" data-open-order><span class="btn-label">call
-                      to order</span></a></div>
-              </div>
-              <div class="relative">
-                <img class="menu-scribble"
-                  src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/643f14976e150711fea5fe15_Scribble5.svg"
-                  alt="" />
-                <img class="menu-photo" src="images/burger.jpg" alt="The Pub Burger" />
-              </div>
-            </div>
-            <div class="menu-kicker text-ink">01 — Hand-pattied</div>
-          </article>
-
-          <article class="menu-card is-green">
-            <div class="menu-card-body grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
-              <div class="pb-2">
-                <h3 class="text-ink">The Jerk Burger</h3>
-                <p class="text-medium mt-4 max-w-md text-ink">
-                  Our classic burger stacked high and finished with mango salsa and house-made jerk sauce.
-                </p>
-                <div class="mt-6"><a class="btn-doodle is-black" href="#" data-open-order><span class="btn-label">call
-                      to order</span></a></div>
-              </div>
-              <div class="relative">
-                <img class="menu-scribble"
-                  src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/644012adce07f78274a1af14_doodle-green.svg"
-                  alt="" />
-                <img class="menu-photo" src="images/burger3.jpg" alt="The Jerk Burger" />
-              </div>
-            </div>
-            <div class="menu-kicker text-ink">02 — Spicy</div>
-          </article>
-
-          <article class="menu-card is-red">
-            <div class="menu-card-body grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
-              <div class="pb-2">
-                <h3>Jumbo fire-roasted wings</h3>
-                <!-- <div class="text-large mt-2">$17.49</div> -->
-                <p class="text-medium mt-4 max-w-md">
-                  12 fire-roasted wings tossed in Mild Buffalo, Homemade Jerk, Garlic Parmesan, Honey Mustard, or Plain.
-                  Sundays they're a dollar a wing.
-                </p>
-                <div class="mt-6"><a class="btn-doodle is-white" href="#" data-open-order><span class="btn-label">call
-                      to order</span></a></div>
-              </div>
-              <div class="relative">
-                <img class="menu-scribble"
-                  src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/643f14976e150711fea5fe15_Scribble5.svg"
-                  alt="" />
-                <img class="menu-photo" src="images/chx_wings.jpg" alt="Chicken wings" />
-              </div>
-            </div>
-            <div class="menu-kicker">03 — Local favorite</div>
-          </article>
-
-          <article class="menu-card is-cream">
-            <div class="menu-card-body grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
-              <div class="pb-2">
-                <h3>Fried chicken sandwich</h3>
-                <p class="text-medium mt-4 max-w-md">
-                  Hand-battered crispy chicken on brioche with lettuce, tomato, pickle, and mayo. Pub club and shrimp
-                  burgers on the board too.
-                </p>
-                <div class="mt-6"><a class="btn-doodle is-black" href="#" data-open-order><span class="btn-label">call
-                      to order</span></a></div>
-              </div>
-              <div class="relative">
-                <img class="menu-scribble"
-                  src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/644012adce07f78274a1af14_doodle-green.svg"
-                  alt="" />
-                <img class="menu-photo" src="images/fried_chicken_sandwich.jpg" alt="Fried chicken sandwich" />
-              </div>
-            </div>
-            <div class="menu-kicker">04 — Hand-battered</div>
-          </article>
-
-          <article class="menu-card is-red">
-            <div class="menu-card-body grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
-              <div class="pb-2">
-                <h3>Mahi tacos</h3>
-                <p class="text-medium mt-4 max-w-md">
-                  Grilled mahi on warm tortillas with house coleslaw, mango salsa, avocado, and a jerk drizzle. Shrimp
-                  tacos too.
-                </p>
-                <div class="mt-6"><a class="btn-doodle is-white" href="#" data-open-order><span class="btn-label">call
-                      to order</span></a></div>
-              </div>
-              <div class="relative">
-                <img class="menu-scribble"
-                  src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/643f14976e150711fea5fe15_Scribble5.svg"
-                  alt="" />
-                <img class="menu-photo" src="images/mahi_tacos.jpg" alt="Mahi tacos" />
-              </div>
-            </div>
-            <div class="menu-kicker">05 — From the sea</div>
-          </article>
-
-          <article class="menu-card is-yellow">
-            <div class="menu-card-body grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
-              <div class="pb-2">
-                <h3 class="text-ink">New York Reuben</h3>
-                <p class="text-medium mt-4 max-w-md text-ink">
-                  Pastrami, sauerkraut, Swiss, and house sauce on marbled rye. Or go Philly cheesesteak — chopped
-                  sirloin, peppers, onions, provolone.
-                </p>
-                <div class="mt-6"><a class="btn-doodle is-black" href="#" data-open-order><span class="btn-label">call
-                      to order</span></a></div>
-              </div>
-              <div class="relative">
-                <img class="menu-scribble"
-                  src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/643f14976e150711fea5fe15_Scribble5.svg"
-                  alt="" />
-                <img class="menu-photo" src="images/ny_rueben.jpg" alt="New York Reuben" />
-              </div>
-            </div>
-            <div class="menu-kicker text-ink">06 — Guest favorite</div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section_gallery">
-      <div class="gallery_container">
-        <img class="doodle-yellow_gallery"
-          src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/6440187a2c1fcb26f546ba8c_doodle-yellow-bun.svg"
-          alt="" />
-        <img class="doodle-arrow_gallery"
-          src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/6440187a4546c5daf3d87353_doodle-arrow-red.svg"
-          alt="" />
-        <div class="images-gallery_wrapper" data-gallery-track>
-          <img class="image_gallery" width="375" src="images/chx_wings2.jpg" alt="Wings" />
-          <img class="image_gallery" width="375" src="images/pubnachos.jpg" alt="Pub nachos" />
-          <img class="image_gallery" width="375" src="images/motzerella_sticks.jpg" alt="Mozzarella sticks" />
-          <img class="image_gallery" width="375" src="images/fried_calamari.jpg" alt="Fried calamari" />
-          <img class="image_gallery" width="375" src="images/bang_bang_shrimp.jpg" alt="Bang bang shrimp" />
-          <img class="image_gallery" width="375" src="images/fried_flounder.jpg" alt="Fried flounder" />
-          <img class="image_gallery" width="375" src="images/grilled_mahi.jpg" alt="Grilled mahi" />
-          <img class="image_gallery" width="375" src="images/philly_cheesesteak.jpg" alt="Philly cheesesteak" />
-          <img class="image_gallery" width="375" src="images/shrimp_burgers.jpg" alt="Shrimp burgers" />
-          <img class="image_gallery" width="375" src="images/pub_club_sandwich.jpg" alt="Pub club sandwich" />
-          <img class="image_gallery" width="375" src="images/burger4.jpg" alt="Burger" />
-          <img class="image_gallery" width="375" src="images/fried_mushrooms.jpg" alt="Fried mushrooms" />
-          <img class="image_gallery" width="375" src="images/blackened_tuna_sandwich.jpg"
-            alt="Blackened tuna sandwich" />
-          <img class="image_gallery" width="375" src="images/fried_flounder_sandwich.jpg"
-            alt="Fried flounder sandwich" />
-          <img class="image_gallery" width="375" src="images/allyoucaneatshrimp.jpg" alt="All you can eat shrimp" />
-          <img class="image_gallery" width="375" src="images/baked_chicken.jpg" alt="Baked chicken" />
-          <img class="image_gallery" width="375" src="images/chef_salad.jpg" alt="Chef salad" />
-          <img class="image_gallery" width="375" src="images/grilled_chx_pasta.jpg" alt="Grilled chicken pasta" />
-          <img class="image_gallery" width="375" src="images/pub_club2.jpg" alt="Pub club" />
-          <img class="image_gallery" width="375" src="images/fried_flounder2.jpg" alt="Fried flounder plate" />
-        </div>
-      </div>
-    </section>
-
-    <section class="section_special-offer" id="specials">
-      <div class="special-offer_container reveal">
-        <div class="special-offer-header_wrapper">
-          <h2>Weekly</h2>
-          <div class="special-offer_span">
-            <h2>specials</h2>
-            <img class="doodle_special-offer" width="200"
-              src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/64401cddc4df8d03bf89a8b1_special-offer-circle.svg"
-              alt="" />
+            <!-- Duplicate Set for Seamless Loop -->
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/patio000.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/fam000.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img024.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img025.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img026.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img027.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img028.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img029.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/img030.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img031.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img032.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img033.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img034.jpg" alt="Gallery photo" loading="lazy" /></div>
           </div>
         </div>
-        <p class="text-medium">
-          Sundays: $1 jumbo fire-roasted wings, all day, 12–8:30pm. Thursdays 11am–3pm: Burger Buddy Lunch — two
-          cheeseburgers and two fries for $16. No coupon required.
-        </p>
-        <img class="doodle-spiral-special_offer"
-          src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/64401e534546c52db3d8d731_doodle-spiral-special_offer.svg"
-          alt="" />
-      </div>
-    </section>
 
-    <section class="section_guests" id="guests">
-      <div class="mx-auto max-w-site px-6 text-center">
-        <h2 class="reveal">Guests &amp; the patio</h2>
-        <p class="text-medium mx-auto mt-4 max-w-xl text-cream/80 reveal">
-          Word travels fast on Pollock Street. Dogs on the patio, live music, trivia, and a courtyard that feels like
-          the neighborhood living room.
-        </p>
       </div>
-      <div class="guests-carpet">
-        <figure class="guest-polaroid is-a doodle-in">
-          <img src="images/guests.jpg" alt="Guests at Michael's" />
-          <figcaption>Family Friendly</figcaption>
-        </figure>
-        <figure class="guest-polaroid is-b doodle-in">
-          <img src="images/couple_dog.jpg" alt="Couple with their dog on the patio" />
-          <figcaption>Dog-friendly Patio</figcaption>
-        </figure>
-        <figure class="guest-polaroid is-c doodle-in">
-          <img src="images/live_musician.jpg" alt="Live musician" />
-          <figcaption>Live Music</figcaption>
-        </figure>
-        <figure class="guest-polaroid is-d doodle-in">
-          <img src="images/music_duo_live.jpg" alt="Music duo live" />
-          <figcaption>Live On the mic</figcaption>
-        </figure>
-        <figure class="guest-polaroid is-e doodle-in">
-          <img src="images/patio_day.jpg" alt="Patio in the daytime" />
-          <figcaption>Enjoy the Vibes</figcaption>
-        </figure>
-        <figure class="guest-polaroid is-f doodle-in">
-          <img src="images/5draftday.jpg" alt="Draft day crowd" />
-          <figcaption>Catch our local musicians</figcaption>
-        </figure>
-        <figure class="guest-polaroid is-g doodle-in">
-          <img src="images/thrivia_ad.jpg" alt="Trivia night" />
-          <figcaption>Trivia night with friends</figcaption>
-        </figure>
-      </div>
-    </section>
 
-    <section class="section_faq relative">
-      <div class="mx-auto max-w-site px-6 py-16 md:px-10 md:py-24">
-        <h2 class="mb-12 text-center reveal">FAQs</h2>
-        <div class="faq_component">
-          <div class="faq-row reveal">
-            <div class="text-medium font-bold">Can I bring my dog?</div>
-            <p class="text-medium text-cream/80">Yes. Both patios and the courtyard welcome dogs, with water bowls and a
-              dog menu on request.</p>
-          </div>
-          <div class="faq-row reveal">
-            <div class="text-medium font-bold">Do you take reservations or big groups?</div>
-            <p class="text-medium text-cream/80">Yes — the upstairs dining room seats large parties. Call (252) 631-1209
-              about hosting a celebration.</p>
-          </div>
-          <div class="faq-row reveal">
-            <div class="text-medium font-bold">Is there takeout and delivery?</div>
-            <p class="text-medium text-cream/80">Dine-in, takeout, and delivery. Call the pub or ask your server about
-              the current draft list and daily catch.</p>
-          </div>
-          <div class="faq-row reveal">
-            <div class="text-medium font-bold">Where do I park?</div>
-            <p class="text-medium text-cream/80">Street parking and a nearby public lot. We're at 208 Pollock St, a
-              short walk from Union Point and the waterfront.</p>
-          </div>
-          <div class="faq-row reveal">
-            <div class="text-medium font-bold">What are your hours?</div>
-            <p class="text-medium text-cream/80">Mon–Tue 11–9, Wed–Thu 11–10, Fri–Sat 11–11, Sunday 12–8:30.</p>
-          </div>
-        </div>
-        <div class="mt-20 text-center reveal">
-          <h3 class="heading-h4 mb-6">Still have questions?</h3>
-          <a class="btn-doodle is-cream" href="contact.html"><span class="btn-label">Contact us</span></a>
-        </div>
+      <!-- Interactive Controls / Buttons -->
+      <div class="flex justify-center items-center gap-4 mt-10">
+        <button id="toggle-pause" class="bg-cream/10 hover:bg-cream/20 text-cream px-5 py-2.5 rounded-full text-sm font-semibold transition-colors cursor-pointer flex items-center gap-2">
+          <svg id="pause-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          <span id="pause-text">Pause Scroll</span>
+        </button>
+        <button id="reverse-direction" class="bg-cream/10 hover:bg-cream/20 text-cream px-5 py-2.5 rounded-full text-sm font-semibold transition-colors cursor-pointer flex items-center gap-2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          Reverse Flow
+        </button>
       </div>
-      <img class="pointer-events-none absolute -bottom-8 right-0 w-40 md:w-64"
-        src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/64402cddceed73989f521a28_doodle-blue_footer.svg"
-        alt="" />
     </section>
   </main>
 
-  <footer class="footer_component relative px-6 pb-10 pt-16 md:px-10 md:pt-24">
+  <!-- Footer -->
+  <footer class="footer_component relative px-6 pb-10 pt-16 md:px-10 md:pt-24 border-t border-cream/10">
     <div class="mx-auto max-w-site reveal-fade">
-      <div class="grid gap-12 md:grid-cols-[1.2fr_0.8fr]">
-        <div>
-          <a href="index.html" class="brand-mark is-footer mb-8 inline-block"><img src="images/logo.png"
-              alt="Michael's Pub & Patio" /></a>
-          <div class="mt-8 grid gap-10 sm:grid-cols-2">
-            <div class="text-sm leading-6">
-              <p><span class="font-semibold">Address:<br /></span>208 Pollock St<br />New Bern, NC 28560</p>
-              <p class="mt-5"><span class="font-semibold">Contact:<br /></span>
-                <a class="contact-link" href="tel:+12526311209">(252) 631-1209</a><br />
-                <a class="contact-link"
-                  href="mailto:Michaelspubandpatio23@gmail.com">Michaelspubandpatio23@gmail.com</a>
-              </p>
-              <div class="mt-5 flex items-center gap-4">
-                <a class="social-link" href="https://www.facebook.com/MichaelsNewBern/" target="_blank" rel="noopener"
-                  aria-label="Facebook">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M16.5 6H13.5C12.9477 6 12.5 6.44772 12.5 7V10H16.5C16.6137 9.99748 16.7216 10.0504 16.7892 10.1419C16.8568 10.2334 16.8758 10.352 16.84 10.46L16.1 12.66C16.0318 12.8619 15.8431 12.9984 15.63 13H12.5V20.5C12.5 20.7761 12.2761 21 12 21H9.5C9.22386 21 9 20.7761 9 20.5V13H7.5C7.22386 13 7 12.7761 7 12.5V10.5C7 10.2239 7.22386 10 7.5 10H9V7C9 4.79086 10.7909 3 13 3H16.5C16.7761 3 17 3.22386 17 3.5V5.5C17 5.77614 16.7761 6 16.5 6Z"
-                      fill="currentColor" />
-                  </svg>
-                </a>
-                <a class="social-link" href="https://www.instagram.com/michaelspubandpatio_/" target="_blank"
-                  rel="noopener" aria-label="Instagram">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M16 3H8C5.23858 3 3 5.23858 3 8V16C3 18.7614 5.23858 21 8 21H16C18.7614 21 21 18.7614 21 16V8C21 5.23858 18.7614 3 16 3ZM19.25 16C19.2445 17.7926 17.7926 19.2445 16 19.25H8C6.20735 19.2445 4.75549 17.7926 4.75 16V8C4.75549 6.20735 6.20735 4.75549 8 4.75H16C17.7926 4.75549 19.2445 6.20735 19.25 8V16ZM16.75 8.25C17.3023 8.25 17.75 7.80228 17.75 7.25C17.75 6.69772 17.3023 6.25 16.75 6.25C16.1977 6.25 15.75 6.69772 15.75 7.25C15.75 7.80228 16.1977 8.25 16.75 8.25ZM12 7.5C9.51472 7.5 7.5 9.51472 7.5 12C7.5 14.4853 9.51472 16.5 12 16.5C14.4853 16.5 16.5 14.4853 16.5 12C16.5027 10.8057 16.0294 9.65957 15.1849 8.81508C14.3404 7.97059 13.1943 7.49734 12 7.5ZM9.25 12C9.25 13.5188 10.4812 14.75 12 14.75C13.5188 14.75 14.75 13.5188 14.75 12C14.75 10.4812 13.5188 9.25 12 9.25C10.4812 9.25 9.25 10.4812 9.25 12Z"
-                      fill="currentColor" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div class="text-sm leading-6">
-              <p><span class="font-semibold">Opening times:<br /></span>
-                Monday – Tuesday:<br />11:00 AM – 9:00 PM<br /><br />
-                Wednesday – Thursday:<br />11:00 AM – 10:00 PM<br /><br />
-                Friday – Saturday:<br />11:00 AM – 11:00 PM<br /><br />
-                Sunday:<br />12:00 PM – 8:30 PM
-              </p>
-            </div>
+      <!-- Centered & Evenly Spaced Footer Grid -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-12 max-w-5xl mx-auto">
+        <!-- Logo & Address Group -->
+        <div class="flex-1 w-full text-center md:text-left flex flex-col items-center md:items-start">
+          <a href="index.html" class="brand-mark is-footer mb-6 inline-block"><img src="images/logo.png"
+              alt="Michael's Pub &amp; Patio" /></a>
+          <p class="text-sm leading-6">
+            <span class="font-semibold">Address:</span><br />208 Pollock St<br />New Bern, NC 28560
+          </p>
+        </div>
+
+        <!-- Contact & Socials Group -->
+        <div class="flex-1 w-full text-center md:text-left flex flex-col items-center md:items-start text-sm leading-6">
+          <p class="font-semibold mb-2">Contact:</p>
+          <p>
+            <a class="contact-link" href="tel:+12526311209">(252) 631-1209</a><br />
+            <a class="contact-link" href="mailto:Michaelspubandpatio23@gmail.com">Michaelspubandpatio23@gmail.com</a>
+          </p>
+          <div class="mt-4 flex items-center justify-center md:justify-start gap-4">
+            <a class="social-link" href="https://www.facebook.com/MichaelsNewBern/" target="_blank" rel="noopener"
+              aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" class="w-5 h-5">
+                <path
+                  d="M16.5 6H13.5C12.9477 6 12.5 6.44772 12.5 7V10H16.5C16.6137 9.99748 16.7216 10.0504 16.7892 10.1419C16.8568 10.2334 16.8758 10.352 16.84 10.46L16.1 12.66C16.0318 12.8619 15.8431 12.9984 15.63 13H12.5V20.5C12.5 20.7761 12.2761 21 12 21H9.5C9.22386 21 9 20.7761 9 20.5V13H7.5C7.22386 13 7 12.7761 7 12.5V10.5C7 10.2239 7.22386 10 7.5 10H9V7C9 4.79086 10.7909 3 13 3H16.5C16.7761 3 17 3.22386 17 3.5V5.5C17 5.77614 16.7761 6 16.5 6Z"
+                  fill="currentColor" />
+              </svg>
+            </a>
+            <a class="social-link" href="https://www.instagram.com/michaelspubandpatio_/" target="_blank"
+              rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" class="w-5 h-5">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M16 3H8C5.23858 3 3 5.23858 3 8V16C3 18.7614 5.23858 21 8 21H16C18.7614 21 21 18.7614 21 16V8C21 5.23858 18.7614 3 16 3ZM19.25 16C19.2445 17.7926 17.7926 19.2445 16 19.25H8C6.20735 19.2445 4.75549 17.7926 4.75 16V8C4.75549 6.20735 6.20735 4.75549 8 4.75H16C17.7926 4.75549 19.2445 6.20735 19.25 8V16ZM16.75 8.25C17.3023 8.25 17.75 7.80228 17.75 7.25C17.75 6.69772 17.3023 6.25 16.75 6.25C16.1977 6.25 15.75 6.69772 15.75 7.25C15.75 7.80228 16.1977 8.25 16.75 8.25ZM12 7.5C9.51472 7.5 7.5 9.51472 7.5 12C7.5 14.4853 9.51472 16.5 12 16.5C14.4853 16.5 16.5 14.4853 16.5 12C16.5027 10.8057 16.0294 9.65957 15.1849 8.81508C14.3404 7.97059 13.1943 7.49734 12 7.5ZM9.25 12C9.25 13.5188 10.4812 14.75 12 14.75C13.5188 14.75 14.75 13.5188 14.75 12C14.75 10.4812 13.5188 9.25 12 9.25C10.4812 9.25 9.25 10.4812 9.25 12Z"
+                  fill="currentColor" />
+              </svg>
+            </a>
           </div>
+        </div>
+
+        <!-- Opening Times Group -->
+        <div class="flex-1 w-full text-center md:text-left flex flex-col items-center md:items-start text-sm leading-6">
+          <p class="font-semibold mb-2">Opening times:</p>
+          <p>
+            Monday – Tuesday: 11:00 AM – 9:00 PM<br />
+            Wednesday – Thursday: 11:00 AM – 10:00 PM<br />
+            Friday – Saturday: 11:00 AM – 11:00 PM<br />
+            Sunday: 12:00 PM – 8:30 PM
+          </p>
         </div>
       </div>
 
-      <div class="relative mt-16 flex flex-wrap items-end justify-between gap-6">
-        <nav class="flex flex-wrap gap-x-8 gap-y-3">
+      <!-- Navigation Links -->
+      <div class="mt-16 flex flex-col md:flex-row items-center justify-between gap-6 max-w-5xl mx-auto">
+        <nav class="flex flex-wrap justify-center gap-x-8 gap-y-3">
           <a class="footer-link-lg" href="about.html">Our Story</a>
           <a class="footer-link-lg" href="menu.html">Menu</a>
           <a class="footer-link-lg" href="#guests" data-scroll>Guests</a>
@@ -525,11 +423,74 @@
           alt="" />
       </div>
 
-      <div class="mt-10 border-t border-cream/15 pt-6">
+      <div class="mt-10 border-t border-cream/15 pt-6 text-center">
         <p class="text-sm">© 2026 Michael's Pub &amp; Patio. All rights reserved.</p>
       </div>
     </div>
   </footer>
+
+  <!-- Interactive Button & Lightbox Script -->
+  <script>
+    const wrapper = document.getElementById('marquee-wrapper');
+    const pauseBtn = document.getElementById('toggle-pause');
+    const pauseText = document.getElementById('pause-text');
+    const pauseIcon = document.getElementById('pause-icon');
+    const reverseBtn = document.getElementById('reverse-direction');
+
+    let isPaused = false;
+    let isReversed = false;
+
+    if (pauseBtn && wrapper) {
+      pauseBtn.addEventListener('click', () => {
+        isPaused = !isPaused;
+        wrapper.classList.toggle('paused', isPaused);
+        if (isPaused) {
+          pauseText.textContent = 'Resume Scroll';
+          pauseIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+        } else {
+          pauseText.textContent = 'Pause Scroll';
+        }
+      });
+    }
+
+    if (reverseBtn) {
+      reverseBtn.addEventListener('click', () => {
+        isReversed = !isReversed;
+        const tracks = wrapper.querySelectorAll('.gallery-marquee__track-left, .gallery-marquee__track-slow');
+        tracks.forEach(track => {
+          track.style.animationDirection = isReversed ? 'reverse' : 'normal';
+        });
+      });
+    }
+
+    // Lightbox Functionality
+    const lightboxModal = document.getElementById('lightbox-modal');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxBackdrop = document.getElementById('lightbox-backdrop');
+
+    // Attach click listeners to all gallery cards
+    const galleryCards = document.querySelectorAll('.gallery-card');
+    galleryCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const img = card.querySelector('img');
+        if (img) {
+          lightboxImg.src = img.src;
+          lightboxModal.classList.add('is-open');
+        }
+      });
+    });
+
+    function closeLightbox() {
+      lightboxModal.classList.remove('is-open');
+    }
+
+    if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+    if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
   <script src="js/main.js?v=14"></script>
