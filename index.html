@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Community Gallery | Michael's Pub &amp; Patio | New Bern, NC</title>
   <meta name="description"
-    content="Explore our scattered picture frame photo gallery showcasing happy guests, dog-friendly patio moments, live music, and the welcoming neighborhood atmosphere at Michael's Pub & Patio." />
+    content="Explore our triple-row seamless infinite scroll photo gallery showcasing happy guests, dog-friendly patio moments, live music, and the welcoming neighborhood atmosphere at Michael's Pub & Patio." />
   <link rel="preconnect" href="https://cdn.prod.website-files.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -37,56 +37,132 @@
   </script>
   <link rel="stylesheet" href="css/main.css?v=21" />
   <style>
-    /* Scattered Polaroid / Photo Frame Styling without text */
-    .scattered-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2.5rem;
-      max-width: 72rem;
-      margin: 0 auto;
-      padding: 0 1.5rem;
+    /* Infinite Marquee Scroll Animations */
+    @keyframes scrollLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
-    @media (min-width: 768px) {
-      .scattered-gallery {
-        grid-template-columns: repeat(3, 1fr);
-      }
+    @keyframes scrollRight {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
     }
 
-    .polaroid-frame {
+    .gallery-marquee {
+      display: flex;
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+      user-select: none;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+
+    .gallery-marquee__track-left {
+      display: flex;
+      gap: 1.5rem;
+      width: max-content;
+      animation: scrollLeft 100s linear infinite;
+    }
+
+    /* Extra slow track specifically for the middle row */
+    .gallery-marquee__track-slow {
+      display: flex;
+      gap: 1.5rem;
+      width: max-content;
+      animation: scrollRight 200s linear infinite;
+    }
+
+    /* Pause state when hovered or toggled */
+    .gallery-marquee:hover .gallery-marquee__track-left,
+    .gallery-marquee:hover .gallery-marquee__track-slow,
+    .paused .gallery-marquee__track-left,
+    .paused .gallery-marquee__track-slow {
+      animation-play-state: paused;
+    }
+
+    .gallery-card {
       background: #FFF9F0;
       padding: 12px 12px 16px 12px;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), z-index 0.4s ease, box-shadow 0.4s ease;
-      position: relative;
+      flex-shrink: 0;
+      width: 300px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
     }
 
-    .polaroid-frame img {
+    .gallery-card:hover {
+      transform: scale(1.03);
+    }
+
+    @media (min-width: 768px) {
+      .gallery-card {
+        width: 360px;
+      }
+    }
+
+    .gallery-card img {
       width: 100%;
-      height: 280px;
+      height: 260px;
       object-fit: cover;
       display: block;
     }
 
-    /* Organic scattered rotations and tilt nuances */
-    .polaroid-frame:nth-child(1) { transform: rotate(-2deg); }
-    .polaroid-frame:nth-child(2) { transform: rotate(1.5deg) translateY(10px); }
-    .polaroid-frame:nth-child(3) { transform: rotate(-1.5deg) translateY(-5px); }
-    .polaroid-frame:nth-child(4) { transform: rotate(2deg) translateY(15px); }
-    .polaroid-frame:nth-child(5) { transform: rotate(-2.5deg); }
-    .polaroid-frame:nth-child(6) { transform: rotate(1deg) translateY(10px); }
-    .polaroid-frame:nth-child(7) { transform: rotate(-1deg) translateY(-10px); }
-    .polaroid-frame:nth-child(8) { transform: rotate(2.5deg) translateY(5px); }
+    /* Lightbox Modal Styles */
+    .lightbox-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.85);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
 
-    .polaroid-frame:hover {
-      transform: scale(1.05) rotate(0deg) translateY(-5px) !important;
-      z-index: 50;
+    .lightbox-modal.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      background: #FFF9F0;
+      padding: 16px;
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      transform: scale(0.95);
+      transition: transform 0.3s ease;
+    }
+
+    .lightbox-modal.is-open .lightbox-content {
+      transform: scale(1);
+    }
+
+    .lightbox-content img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      display: block;
     }
   </style>
 </head>
 
 <body class="bg-ink text-cream font-sans">
+  <!-- Lightbox Modal for Enlarged Photo -->
+  <div class="lightbox-modal" id="lightbox-modal">
+    <div class="absolute inset-0" id="lightbox-backdrop"></div>
+    <div class="lightbox-content relative z-10">
+      <button class="absolute -top-4 -right-4 bg-ink text-cream hover:text-sauce w-10 h-10 rounded-full flex items-center justify-center font-bold text-xl shadow-lg transition-colors cursor-pointer" type="button" aria-label="Close" id="lightbox-close">
+        &times;
+      </button>
+      <img id="lightbox-img" src="" alt="Enlarged gallery view" />
+    </div>
+  </div>
+
   <!-- Order Modal -->
   <div class="order-modal" data-order-modal>
     <div class="order-modal__backdrop" data-close-order></div>
@@ -107,7 +183,7 @@
           <img class="home-photo is-1" src="images/yuengling.jpg" alt="Yuengling" />
           <img class="home-photo is-2" src="images/georgia_peach.jpg" alt="Georgia peach" />
           <img class="home-photo is-3" src="images/all_american_lemonade.jpg" alt="All American lemonade" />
-          <img class="home-photo is-4" src="images/5draftday.jpg" alt="Draft day" />
+          <img class="home-photo is-4" src="images/patio003.jpg" alt="Draft day" />
         </div>
       </div>
     </div>
@@ -142,62 +218,141 @@
   </div>
 
   <main>
-    <!-- Scattered Picture Frame Gallery Section -->
-    <section class="py-16 md:py-24" id="guests">
-      <div class="mx-auto max-w-site px-6 text-center mb-16">
-        <h2 class="reveal text-4xl md:text-5xl font-display">Guests &amp; the patio</h2>
-        <p class="text-medium mx-auto mt-4 max-w-xl text-cream/80 reveal">
-          Word travels fast on Pollock Street. Dogs on the patio, live music, trivia, and a courtyard that feels like the neighborhood living room.
-        </p>
+    <!-- Dedicated Community Gallery Triple-Row Marquee Section -->
+    <section class="py-16 md:py-24 overflow-hidden" id="guests">
+      <div class="mx-auto max-w-site px-6 text-center mb-12">
+        <h2 class="reveal text-5xl md:text-5xl font-display">The People Who Make It Special</h2>
       </div>
 
-      <!-- Scattered Polaroid Grid Layout (No Text Captions) -->
-      <div class="scattered-gallery">
-        <div class="polaroid-frame">
-          <img src="images/cm.jpg" alt="Guests at Michael's" loading="lazy" />
+      <!-- Marquee Container with 3 Rows -->
+      <div id="marquee-wrapper" class="space-y-6 w-full relative">
+        
+        <!-- Row 1: Scrolling Left -->
+        <div class="gallery-marquee">
+          <div class="gallery-marquee__track-left">
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/guests.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/couple_dog.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/grace.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/diner000.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img000.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img001.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img002.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img003.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img004.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img005.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/img006.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img007.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img008.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img009.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img010.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img011.jpg" alt="Gallery photo" loading="lazy" /></div>
+
+            <!-- Duplicate Set for Seamless Loop -->
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/guests.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/couple_dog.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/grace.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/diner000.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img000.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img001.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img002.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img003.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img004.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img005.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/img006.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img007.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img008.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img009.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img010.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img011.jpg" alt="Gallery photo" loading="lazy" /></div>
+          </div>
         </div>
-        <div class="polaroid-frame">
-          <img src="images/grace.jpg" alt="Dog-friendly patio" loading="lazy" />
+
+        <!-- Row 2: Scrolling Right (Slower Track) -->
+        <div class="gallery-marquee">
+          <div class="gallery-marquee__track-slow">
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/patio_day.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/trivia000.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/thrivia_ad.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/building.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img012.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img013.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img014.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/img015.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img016.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img017.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img018.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img019.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img020.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/img021.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img022.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img023.jpg" alt="Gallery photo" loading="lazy" /></div>
+
+            <!-- Duplicate Set for Seamless Loop -->
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/patio_day.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/trivia000.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/thrivia_ad.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/building.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img012.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img013.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img014.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/img015.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img016.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img017.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img018.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img019.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img020.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/img021.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img022.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img023.jpg" alt="Gallery photo" loading="lazy" /></div>
+          </div>
         </div>
-        <div class="polaroid-frame">
-          <img src="images/couple_dog.jpg" alt="Live music" loading="lazy" />
+
+        <!-- Row 3: Scrolling Left -->
+        <div class="gallery-marquee">
+          <div class="gallery-marquee__track-left">
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/patio001.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/fam000.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img024.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img025.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img026.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img027.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img028.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img029.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/img030.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img031.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img032.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img033.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img034.jpg" alt="Gallery photo" loading="lazy" /></div>
+
+            <!-- Duplicate Set for Seamless Loop -->
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/patio000.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/fam000.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img024.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img025.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img026.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img027.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img028.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1deg]"><img src="images/img029.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1.5deg]"><img src="images/img030.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[2deg]"><img src="images/img031.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-1deg]"><img src="images/img032.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[1.5deg]"><img src="images/img033.jpg" alt="Gallery photo" loading="lazy" /></div>
+            <div class="gallery-card transform rotate-[-2deg]"><img src="images/img034.jpg" alt="Gallery photo" loading="lazy" /></div>
+          </div>
         </div>
-        <div class="polaroid-frame">
-          <img src="images/diner000.jpg" alt="Live on the mic" loading="lazy" />
-        </div>
-        <div class="polaroid-frame">
-          <img src="images/patio000.jpg" alt="Patio in the daytime" loading="lazy" />
-        </div>
-        <div class="polaroid-frame">
-          <img src="images/trivia000.jpg" alt="Trivia night" loading="lazy" />
-        </div>
-        <div class="polaroid-frame">
-          <img src="images/fam000.jpg" alt="Family friendly" loading="lazy" />
-        </div>
-        <div class="polaroid-frame">
-          <img src="images/hw002.jpg" alt="Draft day crowd" loading="lazy" />
-        </div>
-        <div class="polaroid-frame">
-          <img src="images/patio003.jpg" alt="Historic building" loading="lazy" />
-        </div>
-        <div class="polaroid-frame">
-          <img src="images/pt.jpg" alt="Family friendly" loading="lazy" />
-        </div>
-        <div class="polaroid-frame">
-          <img src="images/event000.jpg" alt="Draft day crowd" loading="lazy" />
-        </div>
-        <div class="polaroid-frame">
-          <img src="images/patio002.jpg" alt="Historic building" loading="lazy" />
-        </div>
-        <div class="polaroid-frame">
-          <img src="images/hw001.jpg" alt="Family friendly" loading="lazy" />
-        </div>
-        <div class="polaroid-frame">
-          <img src="images/hw000.jpg" alt="Draft day crowd" loading="lazy" />
-        </div>
-        <div class="polaroid-frame">
-          <img src="images/building.jpg" alt="Historic building" loading="lazy" />
-        </div>
+
+      </div>
+
+      <!-- Interactive Controls / Buttons -->
+      <div class="flex justify-center items-center gap-4 mt-10">
+        <button id="toggle-pause" class="bg-cream/10 hover:bg-cream/20 text-cream px-5 py-2.5 rounded-full text-sm font-semibold transition-colors cursor-pointer flex items-center gap-2">
+          <svg id="pause-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          <span id="pause-text">Pause Scroll</span>
+        </button>
+        <button id="reverse-direction" class="bg-cream/10 hover:bg-cream/20 text-cream px-5 py-2.5 rounded-full text-sm font-semibold transition-colors cursor-pointer flex items-center gap-2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          Reverse Flow
+        </button>
       </div>
     </section>
   </main>
@@ -273,6 +428,69 @@
       </div>
     </div>
   </footer>
+
+  <!-- Interactive Button & Lightbox Script -->
+  <script>
+    const wrapper = document.getElementById('marquee-wrapper');
+    const pauseBtn = document.getElementById('toggle-pause');
+    const pauseText = document.getElementById('pause-text');
+    const pauseIcon = document.getElementById('pause-icon');
+    const reverseBtn = document.getElementById('reverse-direction');
+
+    let isPaused = false;
+    let isReversed = false;
+
+    if (pauseBtn && wrapper) {
+      pauseBtn.addEventListener('click', () => {
+        isPaused = !isPaused;
+        wrapper.classList.toggle('paused', isPaused);
+        if (isPaused) {
+          pauseText.textContent = 'Resume Scroll';
+          pauseIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+        } else {
+          pauseText.textContent = 'Pause Scroll';
+        }
+      });
+    }
+
+    if (reverseBtn) {
+      reverseBtn.addEventListener('click', () => {
+        isReversed = !isReversed;
+        const tracks = wrapper.querySelectorAll('.gallery-marquee__track-left, .gallery-marquee__track-slow');
+        tracks.forEach(track => {
+          track.style.animationDirection = isReversed ? 'reverse' : 'normal';
+        });
+      });
+    }
+
+    // Lightbox Functionality
+    const lightboxModal = document.getElementById('lightbox-modal');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxBackdrop = document.getElementById('lightbox-backdrop');
+
+    // Attach click listeners to all gallery cards
+    const galleryCards = document.querySelectorAll('.gallery-card');
+    galleryCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const img = card.querySelector('img');
+        if (img) {
+          lightboxImg.src = img.src;
+          lightboxModal.classList.add('is-open');
+        }
+      });
+    });
+
+    function closeLightbox() {
+      lightboxModal.classList.remove('is-open');
+    }
+
+    if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+    if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
   <script src="js/main.js?v=14"></script>
