@@ -9,7 +9,7 @@ $pickle: #05c167;
 $doodle-blue: #493aff;
 $overlay: rgba(29, 29, 29, 0.9);
 
-$font-display: "Barrio", Georgia, sans-serif;
+$font-display: "Bebas Neue", Impact, sans-serif;
 $font-body: "Work Sans", sans-serif;
 
 $cdn: "https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8";
@@ -46,8 +46,8 @@ h4,
 .font-display {
   font-family: $font-display;
   font-weight: 400;
-  text-transform: none;
-  letter-spacing: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   margin: 0;
 }
 
@@ -745,6 +745,8 @@ body.modal-open {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+// Menu page layout lives in css/main.css (.menu-room, .menu-reader).
 
 @media (min-width: 992px) {
   .hero-image {
