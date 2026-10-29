@@ -95,42 +95,40 @@
       </div>
 
       <form class="reveal" data-contact-form>
-        <div data-form-fields class="grid gap-6 sm:grid-cols-2">
-          <label class="block">
-            <span class="text-md">First name</span>
-            <input class="field" type="text" name="firstName" required />
-          </label>
-          <label class="block">
-            <span class="text-md">Last name</span>
-            <input class="field" type="text" name="lastName" required />
-          </label>
-          <label class="block">
-            <span class="text-md">Email</span>
-            <input class="field" type="email" name="email" required />
-          </label>
-          <label class="block">
-            <span class="text-md">Phone number</span>
-            <input class="field" type="tel" name="phone" />
-          </label>
-          <label class="block sm:col-span-2">
-            <span class="text-md">Subject</span>
-            <select class="field" name="subject" required>
-              <option value="">Select one...</option>
-              <option>Large party / upstairs dining</option>
-              <option>Dog menu &amp; patio</option>
-              <option>Takeout or catering</option>
-            </select>
-          </label>
-          <label class="block sm:col-span-2">
-            <span class="text-md">Message</span>
-            <textarea class="field min-h-[120px] resize-y" name="message" required></textarea>
-          </label>
-          <div class="sm:col-span-2">
-            <button class="btn-doodle is-cream" type="submit"><span class="btn-label">Send message</span></button>
-          </div>
-        </div>
-        <p class="mt-8 text-pickle" data-form-success hidden>Thank you! Your submission has been received!</p>
-      </form>
+  <div data-form-fields class="grid gap-6 sm:grid-cols-2">
+    <label class="block">
+      <span class="text-md">First name</span>
+      <input class="field" type="text" name="firstName" required />
+    </label>
+    <label class="block">
+      <span class="text-md">Last name</span>
+      <input class="field" type="text" name="lastName" required />
+    </label>
+    <label class="block">
+      <span class="text-md">Email</span>
+      <input class="field" type="email" name="email" required />
+    </label>
+    <label class="block">
+      <span class="text-md">Phone number</span>
+      <input class="field" type="tel" name="phone" />
+    </label>
+    
+    <!-- Changed from <select> to <input type="text"> -->
+    <label class="block sm:col-span-2">
+      <span class="text-md">Subject</span>
+      <input class="field" type="text" name="subject" placeholder="What is this regarding?" required />
+    </label>
+
+    <label class="block sm:col-span-2">
+      <span class="text-md">Message</span>
+      <textarea class="field min-h-[120px] resize-y" name="message" required></textarea>
+    </label>
+    <div class="sm:col-span-2">
+      <button class="btn-doodle is-cream" type="submit"><span class="btn-label">Send message</span></button>
+    </div>
+  </div>
+  <p class="mt-8 text-pickle" data-form-success hidden>Thank you! Your submission has been received!</p>
+</form>
     </main>
 
     <img class="ml-auto w-40 md:w-56" src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/64402cddceed73989f521a28_doodle-blue_footer.svg" alt="" />
