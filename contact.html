@@ -43,7 +43,7 @@
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M24.056 23.5004L23.5004 24.056C23.1935 24.3628 22.696 24.3628 22.3892 24.056L16 17.6668L9.61078 24.056C9.30394 24.3628 8.80645 24.3628 8.49961 24.056L7.94403 23.5004C7.63719 23.1936 7.63719 22.6961 7.94403 22.3892L14.3332 16L7.94403 9.61081C7.63719 9.30397 7.63719 8.80648 7.94403 8.49964L8.49961 7.94406C8.80645 7.63721 9.30394 7.63721 9.61078 7.94406L16 14.3333L22.3892 7.94404C22.6961 7.6372 23.1935 7.6372 23.5004 7.94404L24.056 8.49963C24.3628 8.80647 24.3628 9.30395 24.056 9.61079L17.6667 16L24.056 22.3892C24.3628 22.6961 24.3628 23.1936 24.056 23.5004Z" fill="currentColor"/></svg>
         </button>
         <div class="mx-auto max-w-xl text-center">
-          <h2 class="mb-3">Call to order</h2>
+          <h2 class="mb-3">Call to Order</h2>
           <p class="text-medium">Dine-in, takeout &amp; delivery from 208 Pollock St.</p>
           <a class="btn-doodle is-cream mt-8" href="tel:+12526311209"><span class="btn-label">(252) 631-1209</span></a>
           <div class="home-photos is-modal">
@@ -60,7 +60,7 @@
       <div class="mx-auto flex max-w-site items-center justify-between px-6 py-4 md:px-10">
         <a href="index.html" class="brand-mark" aria-label="home"><img src="images/logo.png" alt="Michael's Pub & Patio" /></a>
         <nav class="hidden items-center gap-8 lg:flex">
-          <a class="navbar_link" href="about.html"><span class="navbar-link_label">Our Story</span></a>
+          <a class="navbar_link" href="about.html"><span class="navbar-link_label">About Us</span></a>
           <a class="navbar_link" href="menu.html"><span class="navbar-link_label">Menu</span></a>
           <a class="navbar_link" href="index.html#guests"><span class="navbar-link_label">Gallery</span></a>
           <a class="navbar_link" href="contact.html"><span class="navbar-link_label">Visit</span></a>
@@ -73,9 +73,9 @@
     </header>
 
     <div class="nav-overlay lg:hidden" data-nav-overlay>
-      <a href="about.html">Our Story</a>
+      <a href="about.html">About Us</a>
       <a href="menu.html">Menu</a>
-      <a href="index.html#guests">Guests</a>
+      <a href="index.html#guests">Gallery</a>
       <a href="contact.html">Visit</a>
       <a class="btn-doodle is-cream mt-4" href="#" data-open-order><span class="btn-label">call to order</span></a>
     </div>
@@ -95,42 +95,40 @@
       </div>
 
       <form class="reveal" data-contact-form>
-        <div data-form-fields class="grid gap-6 sm:grid-cols-2">
-          <label class="block">
-            <span class="text-md">First name</span>
-            <input class="field" type="text" name="firstName" required />
-          </label>
-          <label class="block">
-            <span class="text-md">Last name</span>
-            <input class="field" type="text" name="lastName" required />
-          </label>
-          <label class="block">
-            <span class="text-md">Email</span>
-            <input class="field" type="email" name="email" required />
-          </label>
-          <label class="block">
-            <span class="text-md">Phone number</span>
-            <input class="field" type="tel" name="phone" />
-          </label>
-          <label class="block sm:col-span-2">
-            <span class="text-md">Subject</span>
-            <select class="field" name="subject" required>
-              <option value="">Select one...</option>
-              <option>Large party / upstairs dining</option>
-              <option>Dog menu &amp; patio</option>
-              <option>Takeout or catering</option>
-            </select>
-          </label>
-          <label class="block sm:col-span-2">
-            <span class="text-md">Message</span>
-            <textarea class="field min-h-[120px] resize-y" name="message" required></textarea>
-          </label>
-          <div class="sm:col-span-2">
-            <button class="btn-doodle is-cream" type="submit"><span class="btn-label">Send message</span></button>
-          </div>
-        </div>
-        <p class="mt-8 text-pickle" data-form-success hidden>Thank you! Your submission has been received!</p>
-      </form>
+  <div data-form-fields class="grid gap-6 sm:grid-cols-2">
+    <label class="block">
+      <span class="text-md">First name</span>
+      <input class="field" type="text" name="firstName" required />
+    </label>
+    <label class="block">
+      <span class="text-md">Last name</span>
+      <input class="field" type="text" name="lastName" required />
+    </label>
+    <label class="block">
+      <span class="text-md">Email</span>
+      <input class="field" type="email" name="email" required />
+    </label>
+    <label class="block">
+      <span class="text-md">Phone number</span>
+      <input class="field" type="tel" name="phone" />
+    </label>
+    
+    <!-- Changed from <select> to <input type="text"> -->
+    <label class="block sm:col-span-2">
+      <span class="text-md">Subject</span>
+      <input class="field" type="text" name="subject" placeholder="What is this regarding?" required />
+    </label>
+
+    <label class="block sm:col-span-2">
+      <span class="text-md">Message</span>
+      <textarea class="field min-h-[120px] resize-y" name="message" required></textarea>
+    </label>
+    <div class="sm:col-span-2">
+      <button class="btn-doodle is-cream" type="submit"><span class="btn-label">Send message</span></button>
+    </div>
+  </div>
+  <p class="mt-8 text-pickle" data-form-success hidden>Thank you! Your submission has been received!</p>
+</form>
     </main>
 
     <img class="ml-auto w-40 md:w-56" src="https://cdn.prod.website-files.com/643dc42eed2b1e4fecc0d1d8/64402cddceed73989f521a28_doodle-blue_footer.svg" alt="" />
